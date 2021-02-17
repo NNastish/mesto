@@ -4,6 +4,7 @@
     box-sizing: border-box;
     margin: 0 auto;
     padding: 45px 200px 60px 200px;
+    font-family: "Inter", "Arial", "Helvetica", sans-serif;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;

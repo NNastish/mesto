@@ -1,5 +1,6 @@
 .profile__text {
     width: 294px;
+    padding-right: 16px;
 }
 @media all and (max-width: 1152px) {
     .profile__text {
