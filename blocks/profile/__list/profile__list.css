@@ -1,0 +1,18 @@
+.profile__list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 337px;
+    margin: 0;
+    list-style: none;
+    padding-left: 32px;
+}
+@media all and (max-width: 1152px) {
+    .profile__list {
+        max-width: 282px;
+        padding-top: 26px;
+        padding-bottom: 36px;
+        padding-left: 0;
+
+    }
+}
