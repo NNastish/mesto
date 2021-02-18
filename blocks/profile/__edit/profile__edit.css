@@ -5,6 +5,12 @@
     margin: 0;
     margin-top: 37px;
 }
+.profile__edit:hover {
+    opacity: 0.6;
+border: 2px solid #FFFFFF;
+box-sizing: border-box;
+border-radius: 2px;
+}
 @media all and (max-width: 1152px) {
     .profile__edit {
         margin-top: 8px;

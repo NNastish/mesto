@@ -4,6 +4,12 @@
     border: 2px solid #FFFFFF;
     margin: 0;
 }
+.profile__button:hover {
+    opacity: 0.6;
+border: 2px solid #FFFFFF;
+box-sizing: border-box;
+border-radius: 2px;
+}
 @media all and (max-width: 1152px) {
     .profile__button {
         width: 282px;
