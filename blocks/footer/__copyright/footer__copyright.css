@@ -4,5 +4,10 @@
     weight: 400;
     size: 18px;
     line-height: 22px;
-    margin-top: 67px;
+    margin: 0;
+}
+@media all and (max-width: 425px) {
+    .footer__copyright {
+        max-width: 282px;
+    }
 }

@@ -6,7 +6,6 @@
     align-items: center;
     padding-top: 40px;
     padding-bottom: 51px;
-    border: 1px solid yellow;
 }
 @media all and (max-width: 1152px) {
     .profile {
