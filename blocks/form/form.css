@@ -8,7 +8,6 @@
     border-radius: 10px;
     margin: 0 auto;
     overflow: hidden;
-
 }
 @media all and (max-width: 768px) {
     .form {

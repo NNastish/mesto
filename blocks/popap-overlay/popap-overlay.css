@@ -3,10 +3,14 @@
     justify-content: center;
     align-items: center;
     position: fixed;
+    visibility: visible;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0, 0.8);
-    border: 1px solid red;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none;
+}
+.popap-overlay_open {
+    display: flex;
 }

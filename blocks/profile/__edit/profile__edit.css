@@ -1,20 +1,19 @@
 .profile__edit {
+    background-image: url(../../../images/edit.svg);
     width: 24px;
     height: 24px;
-    border: 1px solid #FFFFFF;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-color: #000;
+    border: 1px solid #fff;
+    outline: none;
     margin: 0;
-    margin-top: 37px;
+    padding: 0;
+    cursor: pointer;
 }
 .profile__edit:hover {
     opacity: 0.6;
-border: 2px solid #FFFFFF;
-box-sizing: border-box;
-border-radius: 2px;
-}
-@media all and (max-width: 1152px) {
-    .profile__edit {
-        margin-top: 8px;
-        width: 18px;
-        height: 18px;
-    }
+    border: 1px solid #ffffff;
+    box-sizing: border-box;
+    border-radius: 2px;
 }

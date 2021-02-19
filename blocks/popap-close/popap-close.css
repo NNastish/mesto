@@ -2,13 +2,14 @@
     position: absolute;
     right: -10%;
     top: -40px;
-    background-image: url(../../images/Close\ Icon.png);
+    background-image: url(../../images/Close\Icon.png);
     background-position: 50%;
     background-repeat: no-repeat;
     background-color: transparent;
     border: none;
     width: 40px;
     height: 40px;
+    cursor: pointer;
 }
 .popap-close:hover {
     opacity: 0.6;

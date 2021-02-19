@@ -9,47 +9,27 @@
     </head>
     <body class="container">
         <div class="page">
-
-
-
-            <div class="popap-overlay">
-                <div class="popap-window">
-                    <button class="popap-close" type="button"></button>
-                    <form class="form">
-                        <h2 class="form__title">Редактировать профиль</h2>
-                        <input class="form__text" type="text">
-                        <input class="form__text" type="text">
-                        <button class="form__button" type="submit">Сохранить</button>
-                    </form>  
-                </div>
-            </div>
-
-
-
-
             <section class="header">
-                <img src="./images/logo.svg" alt="Логотип" class="header__logo">
-                <img src="./images/Line.jpg" alt="Линия" class="header__line"> 
-             </section>
+                <img src="./images/logo.svg" alt="Логотип" class="header__logo" />
+                <img src="./images/Line.jpg" alt="Линия" class="header__line" />
+            </section>
 
-             <section class="profile">
-                <div class="profile__info">
-                    <img src="./images/image.jpg" alt="Аватар" class="profile__avatar">
-                    <ul class="profile__list">
-                        <li class="profile__text">
-                            <h1 class="profile__title">Жак-Ив Кусто</h1>
-                        </li>
-                        <li class="profile__edit">
-                            <img src="./images/edit.svg" alt="Редактировать" class="profile__picture">
-                        </li>
-                        <li class="profile__subtitle">
-                            <p class="profile__paragraph">Исследователь океана</p>
-                        </li>
-                    </ul>
+            <section class="profile">
+                <div class="profile__box">
+                    <div class="profile__avatar">
+                        <img class="profile__photo" src="./images/image.jpg" alt="Аватар" />
+                    </div>
+
+                    <div class="profile__info">
+                        <div class="profile__header">
+                            <h2 class="profile__title">Жак-Ив Кусто</h2>
+                            <button type="button" class="profile__edit"></button>
+                        </div>
+                        <p class="profile__text">Исследователь океана</p>
+                    </div>
                 </div>
-                <figure class="profile__button">
-                    <img src="./images/button.svg" alt="Кнопка" class="profile__img">
-                </figure>
+
+                <button type="button" class="profile__add"></button>
             </section>
 
             <section class="elements">
@@ -60,7 +40,7 @@
                             <h2 class="elements__title">Карачаевск</h2>
                         </li>
                         <li>
-                            <img src="./images/like.svg" alt="Лайк" class="elements__like">
+                            <img src="./images/like.svg" alt="Лайк" class="elements__like" />
                         </li>
                     </ul>
                 </div>
@@ -72,7 +52,7 @@
                             <h2 class="elements__title">Гора Эльбрус</h2>
                         </li>
                         <li>
-                            <img src="./images/like.svg" alt="Лайк" class="elements__like">
+                            <img src="./images/like.svg" alt="Лайк" class="elements__like" />
                         </li>
                     </ul>
                 </div>
@@ -84,7 +64,7 @@
                             <h2 class="elements__title">Домбай</h2>
                         </li>
                         <li>
-                            <img src="./images/like.svg" alt="Лайк" class="elements__like">
+                            <img src="./images/like.svg" alt="Лайк" class="elements__like" />
                         </li>
                     </ul>
                 </div>
@@ -96,7 +76,7 @@
                             <h2 class="elements__title">Гора Эльбрус</h2>
                         </li>
                         <li>
-                            <img src="./images/like.svg" alt="Лайк" class="elements__like">
+                            <img src="./images/like.svg" alt="Лайк" class="elements__like" />
                         </li>
                     </ul>
                 </div>
@@ -108,7 +88,7 @@
                             <h2 class="elements__title">Домбай</h2>
                         </li>
                         <li>
-                            <img src="./images/like.svg" alt="Лайк" class="elements__like">
+                            <img src="./images/like.svg" alt="Лайк" class="elements__like" />
                         </li>
                     </ul>
                 </div>
@@ -120,19 +100,27 @@
                             <h2 class="elements__title">Карачаево-Черкесия</h2>
                         </li>
                         <li>
-                            <img  src="./images/like.svg" alt="Лайк" class="elements__like">
+                            <img src="./images/like.svg" alt="Лайк" class="elements__like" />
                         </li>
                     </ul>
                 </div>
-
             </section>
 
             <section class="footer">
                 <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
             </section>
 
+            <div class="popap-overlay">
+                <div class="popap-window">
+                    <button class="popap-close" type="button"></button>
+                    <form class="form">
+                        <h2 class="form__title">Редактировать профиль</h2>
+                        <input class="form__text" type="text" value="Жак-Ив Кусто" placeholder="Имя" />
+                        <input class="form__text" type="text" value="Исследователь океана" placeholder="О себе" />
+                        <button class="form__button" type="submit">Сохранить</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </body>
 </html>
-
-

@@ -1,6 +1,6 @@
-.elements__lists{
+.elements__lists {
     max-width: 246px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     list-style: none;
     display: flex;
     flex-direction: row;

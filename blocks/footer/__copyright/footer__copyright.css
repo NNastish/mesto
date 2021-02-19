@@ -1,7 +1,7 @@
 .footer__copyright {
-    color: rgb(84,84,84,1);
+    color: rgb(84, 84, 84, 1);
     width: 318px;
-    weight: 400;
+    font-weight: 400;
     size: 18px;
     line-height: 22px;
     margin: 0;
