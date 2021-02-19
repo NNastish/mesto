@@ -3,9 +3,9 @@
 @import url(../blocks/page/page.css);
 @import url(../blocks/container/container.css);
 
-@import url(../blocks/popap-overlay/popap-overlay.css);
-@import url(../blocks/popap-window/popap-window.css);
-@import url(../blocks/popap-close/popap-close.css);
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/__window/popup__window.css);
+@import url(../blocks/popup/__close/popup__close.css);
 @import url(../blocks/form/__title/form__title.css);
 @import url(../blocks/form/form.css);
 @import url(../blocks/form/__text/form__text.css);

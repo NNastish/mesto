@@ -1,8 +1,8 @@
-.popap-close {
+.popup__close {
     position: absolute;
     right: -10%;
     top: -40px;
-    background-image: url(../../images/Close\Icon.png);
+    background-image: url(../../../images/Close.svg);
     background-position: 50%;
     background-repeat: no-repeat;
     background-color: transparent;
@@ -11,11 +11,11 @@
     height: 40px;
     cursor: pointer;
 }
-.popap-close:hover {
+.popup__close:hover {
     opacity: 0.6;
 }
 @media all and (max-width: 320px) {
-    .popap-close {
+    .popup__close {
         right: 0;
         width: 26px;
         height: 26px;
