@@ -9,6 +9,7 @@
     text-align: center;
     border-radius: 2px;
     margin-bottom: 37px;
+    border: none;
 }
 .form__button:hover {
     opacity: 0.8;
