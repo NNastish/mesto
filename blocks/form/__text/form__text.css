@@ -8,6 +8,7 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
+    outline: none;
     color: black;
 }
 .form__text:last-child {
