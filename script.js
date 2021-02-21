@@ -21,7 +21,7 @@ let formButton = document.querySelector(".form__button"); //выбираем  к
 
 function formSubmitHandler(evt) {
     // функция сохранить новые данные
-    evt.preventDefault(); //отмена стандартного события, чтобы страница не перегружалась?
+    evt.preventDefault(); //отмена стандартного события, чтобы страница не перегружалась? (как на вебинаре)
     profileTitle.textContent = nameInput.value; // меняем заголовок
     profileText.textContent = aboutInput.value; // меняет параграф
     popup.classList.remove("popup_open"); // закрываем попап
