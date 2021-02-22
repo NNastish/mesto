@@ -1,4 +1,4 @@
-.elements {
+.cards {
         display: grid;
         grid-template-columns: repeat(auto-fill, 282px);
         grid-column-gap: 16px;

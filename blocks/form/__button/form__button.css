@@ -8,7 +8,8 @@
     line-height: 22px;
     text-align: center;
     border-radius: 2px;
-    margin-bottom: 37px;
+    margin-bottom: 30px;
+    margin-top: 18px;
     border: none;
 }
 .form__button:hover {
@@ -20,6 +21,7 @@
         width: 238px;
         font-size: 14px;
         line-height: 17px;
-        margin-bottom: 25px;
+        margin-top: 15px;
+        margin-bottom: 0;
     }
 }
