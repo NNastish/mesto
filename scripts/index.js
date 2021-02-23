@@ -5,7 +5,7 @@ let profileTitle = document.querySelector(".profile__title"); //выбираем
 let profileText = document.querySelector(".profile__text"); //выбираем параграф, который нужно поменять
 let nameInput = document.querySelector("#name"); //выбираем  строку ввода имени, которая будет менять заголовок
 let aboutInput = document.querySelector("#about"); //выбираем  строку ввода описания, которая будет менять параграф
-let formButton = document.querySelector(".form__button"); //выбираем  кнопку, которая будет сохранять изменения
+let formButton = document.querySelector(".form"); //выбираем  кнопку, которая будет сохранять изменения
 
 function copyValue() {
     nameInput.value = profileTitle.textContent; //копирование заголовка
@@ -31,4 +31,4 @@ function formSubmitHandler(evt) {
 
 profileEditButton.addEventListener("click", openPopup); //действие "клик по кнопке"
 popupCloseButton.addEventListener("click", closePopup); // действие "клип по кнопке"
-formButton.addEventListener("click", formSubmitHandler); // действие "клик по кнопке" почему-то не работает с submit
+formButton.addEventListener("submit", formSubmitHandler); // действие "отправить форму"
