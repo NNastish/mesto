@@ -23,7 +23,7 @@ function closePopup() {
 
 function formSubmitHandler(evt) {
     // функция сохранить новые данные
-    evt.preventDefault(); //отмена стандартного реагирования браузера на событие *поправка от ревьюера :)
+    evt.preventDefault(); //отмена стандартного реагирования браузера на событие *поправка от ревьюера
     profileTitle.textContent = nameInput.value; // меняем заголовок
     profileText.textContent = aboutInput.value; // меняет параграф
     closePopup(); // закрываем попап
