@@ -25,11 +25,11 @@
                     </div>
                 </div>
 
-                <button type="button" class="profile__add"></button>
+                <button type="button" class="profile__add" id="add"></button>
             </section>
 
             <section class="cards">
-                <article class="card">
+            <!--   <article class="card">
                     <img src="./images/Dubai.jpg" alt="Дубаи" class="card__photo" />
                     <div class="card__lists">
                         <h2 class="card__title">Дубаи</h2>
@@ -75,24 +75,64 @@
                         <h2 class="card__title">Исландия. Голубая логуна</h2>
                         <button type="button" class="card__like"></button>
                     </div>
-                </article>
-            </section>
+                </article> -->
+            </section> 
 
             <section class="footer">
                 <p class="footer__copyright">&copy;&#160;2020 Mesto Russia</p>
             </section>
 
-            <article class="popup">
+            <!-- popup добавления карточки -->
+
+            <article class="popup popup_type_add">
+                <div class="popup__window">
+                    <button class="popup__close" type="button"></button>
+                    <form class="form" name="popup-form">
+                        <h2 class="form__title">Новое место</h2>
+                        <input class="form__input form__input_title" id="input-title" type="text" name="input-title" placeholder="Название" value="" required />
+                        <input class="form__input form__input_link" id="input-link" type="text" name="input-link" placeholder="Ссылка на картинку" value="" required />
+                        <button class="form__button" id="create-button" type="submit">Создать</button>
+                    </form>
+                </div>
+            </article>
+
+            <!-- popup редактирования профиля -->
+
+            <article class="popup popup_type_edit">
                 <div class="popup__window">
                     <button class="popup__close" type="button"></button>
                     <form class="form" name="popup-form">
                         <h2 class="form__title">Редактировать профиль</h2>
-                        <input class="form__input" id="name" type="text" name="input-name" placeholder="Имя" value="" required />
-                        <input class="form__input" id="about" type="text" name="input-about" placeholder="О себе" value="" required />
-                        <button class="form__button" type="submit">Сохранить</button>
+                        <input class="form__input form__input_name" id="name" type="text" name="input-name" placeholder="Имя" value="" required />
+                        <input class="form__input form__input_about" id="about" type="text" name="input-about" placeholder="О себе" value="" required />
+                        <button class="form__button" id="save-button"  type="submit">Сохранить</button>
                     </form>
                 </div>
             </article>
+
+
+            <!-- popup для фото -->
+
+            <article class="overlay">
+                <div class="overlay__container">
+                  <img src="#" alt="" class="overlay__photo">
+                  <p class="overlay__title"></p>
+                  <button class="overlay__close" type="button"></button>
+                </div>
+            </article>
+
+            <!-- загатовка карточки для клонирования -->
+
+            <template id="template">
+                <article class="card">
+                    <img src="#" alt="" class="card__photo" />
+                    <div class="card__lists">
+                        <h2 class="card__title"></h2>
+                        <button type="button" class="card__like"></button>
+                    </div>
+                </article>
+            </template>
+
         </div>
         <script src="./scripts/index.js"></script>
     </body>
