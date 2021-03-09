@@ -33,7 +33,6 @@ const aboutInput = document.querySelector("#about"); //выбираем  стр�
 //-------------------------ТЕМПЛЭЙТ-----------------------------
 
 const cardsContainer = document.querySelector(".cards"); //выбираем дивчик с карточками в тэмплэйт
-// const cardsImage = document.querySelector(".card__photo");
 
 //-------------------------МАССИВ-----------------------------
 
@@ -153,10 +152,6 @@ profileEditButton.addEventListener("click", function() {
 profileAddButton.addEventListener("click", function() {
     openPopup(popupAddCard);
 }); //действие "клик по кнопке добавить фото [+] "
-
-// cardsImage.addEventListener("click", function() {
-//     openPopup(popupPhoto);
-// });
 
 popupCloseButton.forEach((button) => button.addEventListener("click", function() {
     closePopup();
