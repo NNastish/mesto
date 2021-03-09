@@ -113,11 +113,11 @@
 
             <!-- popup для фото -->
 
-            <article class="overlay">
-                <div class="overlay__container">
-                  <img src="#" alt="" class="overlay__photo">
-                  <p class="overlay__title"></p>
-                  <button class="overlay__close" type="button"></button>
+            <article class="popup popup_type_image">
+                <div class="popup__window">
+                  <img src="#" alt="" class="popup__photo">
+                  <p class="popup__title"></p>
+                  <button class="popup__close" type="button"></button>
                 </div>
             </article>
 
@@ -125,7 +125,8 @@
 
             <template id="template">
                 <article class="card">
-                    <img class="card__photo" alt="#"/>
+                    <button type="button" class="card__delete"></button>
+                    <img class="card__photo" alt="фотография"/>
                     <div class="card__lists">
                         <h2 class="card__title"></h2>
                         <button type="button" class="card__like"></button>

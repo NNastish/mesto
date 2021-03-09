@@ -66,12 +66,15 @@ const initialCards = [
     cardElement.querySelector(".card__title").textContent = item.name; //добавляем титл
 
     cardElement.querySelector(".card__like").addEventListener("click", function(evt){
-        evt.target.classList.toggle("card__like_active"); //добавляем лайк
+        evt.target.classList.toggle("card__like_active")
+    }); //добавляем лайк
 
-    })
+    cardElement.querySelector(".card__delete").addEventListener("click", function(evt){
+        evt.target.closest(".card").remove(); //удаляем карточки
+    });
 
     return cardElement;
-  }
+  };
   
   function addInitialCards() { //функция с добавлением карточек в секцию
     initialCards.forEach(function(item) {
