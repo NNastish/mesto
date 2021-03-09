@@ -24,8 +24,7 @@ const aboutInput = document.querySelector("#about"); //выбираем  стр�
 
 //-------------------------ТЕМПЛЭЙТ-----------------------------
 
-const cardTemplate = document.querySelector("#template"); //выбираем темплэйт
-const cardsContainer = document.querySelector(".cards"); //выбираем дивчик с карточками
+const cardsContainer = document.querySelector(".cards"); //выбираем дивчик с карточками в тэмплэйт
 
 //-------------------------МАССИВ-----------------------------
 
@@ -60,43 +59,21 @@ const initialCards = [
 
 
 
-//   function createNewCard(item) {
-//       const newItem = cardTemplate.querySelector(".card").cloneNode(true);
-//       const cardPhoto = newItem.querySelector(".card__photo");
-//       const cardTitle = newItem.querySelector(".card__title");
+  function createNewCard(item) {
+    const cardTemplate = document.querySelector("#template").content; //выбираем темплэйт
+    const cardElement = cardTemplate.querySelector(".card").cloneNode(true); //клонируем карточку
+    cardElement.querySelector(".card__photo").src = item.link; //добавляем сссылку
+    cardElement.querySelector(".card__title").textContent = item.name; //добавляем титл
 
-//       cardTitle.textContent = item.name;
-//       cardPhoto.src = item.link;
-
-//       return newItem;
-
-//   }
-//     function addInitialCards() { //функция с добавлением карточек в секцию
-//         const result = initialCards.map(createNewCard);
-//         cardsContainer.prepend(...result);
-//   };
-
-
-  function addNewCard (item) {
-    return  `
-      <article class="card">
-          <img src="${item.link}" alt="${item.name}" class="card__photo" />
-          <div class="card__lists">
-              <h2 class="card__title">${item.name}</h2>
-              <button type="button" class="card__like"></button>
-           </div>
-      </article>
-      `;
-  };
+    return cardElement;
+  }
   
   function addInitialCards() { //функция с добавлением карточек в секцию
-
     initialCards.forEach(function(item) {
-        let str = addNewCard(item);
-        cardsContainer.insertAdjacentHTML("afterbegin", str); 
+        let str = createNewCard(item);
+        cardsContainer.prepend(str); //добавляем карточку в начало
     });
   };
-  
   
   function copyValue() {
       nameInput.value = profileTitle.textContent; //копирование заголовка
@@ -114,48 +91,25 @@ const initialCards = [
     }
     
     function submitProfileForm(evt) {
-        // функция сохранить новые данные
+
         evt.preventDefault(); //отмена стандартного реагирования браузера на событие *поправка от ревьюера
         profileTitle.textContent = nameInput.value; // меняем заголовок
         profileText.textContent = aboutInput.value; // меняет параграф
         closePopup(); // закрываем попап
     }
     
-    
-    function submitCardForm(evt) {
-        evt.preventDefault();
 
-
-        const titleInput = document.querySelector("#input-title"); //выбираем строку ввода названия
-        const titleValue = titleInput.value;
-
-        const linkInput = document.querySelector("#input-link"); //выбираем строку ввода ссылки
-        const linkValue = linkInput.value;
-        // const titleInput = newItem.querySelector("#input-title"); //выбираем строку ввода названия
-        // const titleValue = titleInput.value;
-
-        // const linkInput = newItem.querySelector("#input-link"); //выбираем строку ввода ссылки
-        // const linkValue = linkInput.value;
-
-        // const newCardForm = createDomNode({ title: titleValue, link: linkValue});
-        // cardsContainer.prepend(newCardForm);
-        // cardsContainer.insertAdjacentHTML('afterbegin', newCardForm);
-        let result = addNewCard({name: titleValue, link: linkValue});
-        cardsContainer.insertAdjacentHTML('afterbegin', result);
- 
-        closePopup();
-    } 
-
-    // Nastya's attempt to create card by using template
     function submitViaTemplate(evt) {
         evt.preventDefault();
 
-        let newItem = createNewCard(evt.value);
-        const titleInput = newItem.querySelector("#input-title"); //выбираем строку ввода названия
-        const titleValue = titleInput.value;
+        const nameInput = document.querySelector("#input-title"); //выбираем строку ввода названия
+        const linkInput = document.querySelector("#input-link"); //выбираем строку ввода ссылки
 
-        const linkInput = newItem.querySelector("#input-link"); //выбираем строку ввода ссылки
+        const nameValue = nameInput.value;
         const linkValue = linkInput.value;
+
+        let newItem = createNewCard({name: nameValue, link: linkValue});
+        cardsContainer.prepend(newItem);
 
         closePopup();
     }
@@ -179,6 +133,7 @@ popupCloseButton.forEach((button) => button.addEventListener("click", function()
 })); //действие "клик по кнопке, которое закрывает попапы (редактирования и добавления фото)"
 
 buttonSaveProfileInfo.addEventListener("submit", submitProfileForm); //действие "клик отправить форму на смену данных в профиле редактирования"
-buttonCreateCard.addEventListener("submit", submitCardForm); //действие "клик по кнопке добавить фото и название  в карточку "
 
+//buttonCreateCard.addEventListener("submit", submitCardForm); //действие "клик по кнопке добавить фото и название  в карточку "
+buttonCreateCard.addEventListener("submit", submitViaTemplate);
 
