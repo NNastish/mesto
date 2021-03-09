@@ -65,6 +65,11 @@ const initialCards = [
     cardElement.querySelector(".card__photo").src = item.link; //добавляем сссылку
     cardElement.querySelector(".card__title").textContent = item.name; //добавляем титл
 
+    cardElement.querySelector(".card__like").addEventListener("click", function(evt){
+        evt.target.classList.toggle("card__like_active"); //добавляем лайк
+
+    })
+
     return cardElement;
   }
   
