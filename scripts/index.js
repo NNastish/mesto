@@ -3,6 +3,14 @@ const popup = document.querySelector(".popup"); //выбираем блок с �
 const popupEditProfile = document.querySelector(".popup_type_edit"); //выбираем второй попап для редактирования по модификатору
 const popupAddCard = document.querySelector(".popup_type_add"); //выбираем второй попап для добавления фотографий по модификатору
 
+//-------------------------ПОПАП С КАРТИНКОЙ----------------------------
+
+const popupOpenImage = document.querySelector(".popup_type_image");
+const popupImageConteainer = document.querySelector(".popup__container");
+const popupPhoto = document.querySelector(".popup__photo");
+const popupCaption = document.querySelector(".popup__caption");
+
+
 //-------------------------КНОПКИ-----------------------------
 
 const popupCloseButton = document.querySelectorAll(".popup__close"); //выбираем кнопку закрытия попап
@@ -25,6 +33,7 @@ const aboutInput = document.querySelector("#about"); //выбираем  стр�
 //-------------------------ТЕМПЛЭЙТ-----------------------------
 
 const cardsContainer = document.querySelector(".cards"); //выбираем дивчик с карточками в тэмплэйт
+// const cardsImage = document.querySelector(".card__photo");
 
 //-------------------------МАССИВ-----------------------------
 
@@ -73,6 +82,13 @@ const initialCards = [
         evt.target.closest(".card").remove(); //удаляем карточки
     });
 
+    cardElement.querySelector(".card__photo").addEventListener("click", function(event) {
+        popupOpenImage.querySelector(".popup__photo").src = cardElement.querySelector(".card__photo").src;
+        popupOpenImage.querySelector(".popup__caption").textContent = cardElement.querySelector(".card__title").textContent;
+
+        openPopup(popupOpenImage);
+    });
+
     return cardElement;
   };
   
@@ -96,6 +112,7 @@ const initialCards = [
     function closePopup() {
         popupEditProfile.classList.remove("popup_opened"); //функция закрыть попап редактирования
         popupAddCard.classList.remove("popup_opened"); //функция закрыть попап добавления фото
+        popupOpenImage.classList.remove("popup_opened");
     }
     
     function submitProfileForm(evt) {
@@ -121,6 +138,7 @@ const initialCards = [
 
         closePopup();
     }
+
     
 //-------------------ВЫЗОВ ФУНКЦИИ-------------------------------
 
@@ -135,6 +153,10 @@ profileEditButton.addEventListener("click", function() {
 profileAddButton.addEventListener("click", function() {
     openPopup(popupAddCard);
 }); //действие "клик по кнопке добавить фото [+] "
+
+// cardsImage.addEventListener("click", function() {
+//     openPopup(popupPhoto);
+// });
 
 popupCloseButton.forEach((button) => button.addEventListener("click", function() {
     closePopup();
