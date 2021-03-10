@@ -8,9 +8,14 @@
     </head>
     <body class="container">
         <div class="page">
+            
+            <!-- шапка с логотипом -->
+
             <header class="header">
                 <a href="#" target="_self" class="header__link"><img src="./images/logo.svg" alt="Логотип" class="header__logo" /></a>
             </header>
+
+            <!-- секция с профилем -->
 
             <section class="profile">
                 <div class="profile__box">
@@ -28,61 +33,17 @@
                 <button type="button" class="profile__add" id="add"></button>
             </section>
 
-            <section class="cards">
-            <!--   <article class="card">
-                    <img src="./images/Dubai.jpg" alt="Дубаи" class="card__photo" />
-                    <div class="card__lists">
-                        <h2 class="card__title">Дубаи</h2>
-                        <button type="button" class="card__like"></button>
-                    </div>
-                </article>
+            <!-- секция с основным массивом карточек -->
 
-                <article class="card">
-                    <img src="./images/Germany.jpg" alt="Германия" class="card__photo" />
-                    <div class="card__lists">
-                        <h2 class="card__title">Германия</h2>
-                        <button type="button" class="card__like"></button>
-                    </div>
-                </article>
+            <section class="cards"></section>
 
-                <article class="card">
-                    <img src="./images/Japan.jpg" alt="Япония" class="card__photo" />
-                    <div class="card__lists">
-                        <h2 class="card__title">Япония</h2>
-                        <button type="button" class="card__like"></button>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <img src="./images/NY.jpg" alt="Нью-Йорк" class="card__photo" />
-                    <div class="card__lists">
-                        <h2 class="card__title">Нью-Йорк</h2>
-                        <button type="button" class="card__like"></button>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <img src="./images/Switzerland.jpg" alt="Швейцария" class="card__photo" />
-                    <div class="card__lists">
-                        <h2 class="card__title">Швейцария</h2>
-                        <button type="button" class="card__like"></button>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <img src="./images/Bluelagoon.jpg" alt="Исландия" class="card__photo" />
-                    <div class="card__lists">
-                        <h2 class="card__title">Исландия. Голубая логуна</h2>
-                        <button type="button" class="card__like"></button>
-                    </div>
-                </article> -->
-            </section> 
+            <!-- футер -->
 
             <section class="footer">
                 <p class="footer__copyright">&copy;&#160;2020 Mesto Russia</p>
             </section>
 
-            <!-- popup добавления карточки -->
+            <!-- popup добавления новой карточки профиля -->
 
             <article class="popup popup_type_add">
                 <div class="popup__window">
@@ -91,7 +52,7 @@
                         <h2 class="form__title">Новое место</h2>
                         <input class="form__input form__input_title" id="input-title" type="text" name="input-title" placeholder="Название" value="" required />
                         <input class="form__input form__input_link" id="input-link" type="text" name="input-link" placeholder="Ссылка на картинку" value="" required />
-                        <button class="form__button"  type="submit">Создать</button>
+                        <button class="form__button" type="submit">Создать</button>
                     </form>
                 </div>
             </article>
@@ -110,32 +71,30 @@
                 </div>
             </article>
 
+            <!-- popup для увеличения фото -->
 
-            <!-- popup для фото -->
-
-            <article class="popup popup_type_image">
+            <article class="popup popup_type_image popup_opacity">
                 <div class="popup__container">
-                <figure class="popup__figure">
-                    <img src="#" alt="" class="popup__photo">
-                 <figcaption class="popup__caption"></figcaption>
-                </figure>
-                  <button class="popup__close" type="button"></button>
+                    <figure class="popup__figure">
+                        <img src="#" alt="" class="popup__photo" />
+                        <figcaption class="popup__caption"></figcaption>
+                    </figure>
+                    <button class="popup__close" type="button"></button>
                 </div>
             </article>
 
-            <!-- загатовка карточки для клонирования -->
+            <!-- заготовка карточки для клонирования -->
 
             <template id="template">
                 <article class="card">
                     <button type="button" class="card__delete"></button>
-                    <img class="card__photo" alt="фотография"/>
+                    <img class="card__photo" alt="фотография" />
                     <div class="card__lists">
                         <h2 class="card__title"></h2>
                         <button type="button" class="card__like"></button>
                     </div>
                 </article>
             </template>
-
         </div>
         <script src="./scripts/index.js"></script>
     </body>
