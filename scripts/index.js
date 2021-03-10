@@ -6,8 +6,8 @@ const popupAddCard = document.querySelector(".popup_type_add"); //выбирае
 //-------------------------ПОПАП С КАРТИНКОЙ----------------------------
 
 const popupOpenImage = document.querySelector(".popup_type_image"); //выбираем блок с попап с увеличением картинки
-const popupPhoto = document.querySelector(".popup__photo"); //выбираем див в попапе, куда попапдет фото из карточки
-const popupCaption = document.querySelector(".popup__caption"); //выбираем див, куда попадет название фото из карточки
+const popupPhoto = popupOpenImage.querySelector(".popup__photo"); //выбираем див в попапе, куда попапдет фото из карточки
+const popupCaption = popupOpenImage.querySelector(".popup__caption"); //выбираем див, куда попадет название фото из карточки
 
 //-------------------------КНОПКИ-----------------------------
 
@@ -27,46 +27,25 @@ const profileText = document.querySelector(".profile__text"); //выбираем
 const nameInput = document.querySelector("#name"); //выбираем  строку ввода имени, которая будет менять заголовок
 const aboutInput = document.querySelector("#about"); //выбираем  строку ввода описания, которая будет менять параграф
 
+const cardNameInput = document.querySelector("#input-title"); //выбираем строку ввода названия
+const cardLinkInput = document.querySelector("#input-link"); //выбираем строку ввода ссылки
+
+
 //-------------------------ТЕМПЛЭЙТ-----------------------------
 
 const cardsContainer = document.querySelector(".cards"); //выбираем дивчик с карточками в тэмплэйт
 
-//-------------------------МАССИВ-----------------------------
-
-const initialCards = [
-    {
-        name: "Архыз",
-        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-    },
-    {
-        name: "Челябинская область",
-        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-    },
-    {
-        name: "Иваново",
-        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-    },
-    {
-        name: "Камчатка",
-        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-    },
-    {
-        name: "Холмогорский район",
-        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-    },
-    {
-        name: "Байкал",
-        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-    },
-];
 
 //--------------------ФУНКЦИИ------------------------
 
 function createNewCard(item) {
     const cardTemplate = document.querySelector("#template").content; //выбираем темплэйт
     const cardElement = cardTemplate.querySelector(".card").cloneNode(true); //клонируем карточку
-    cardElement.querySelector(".card__photo").src = item.link; //добавляем сссылку
-    cardElement.querySelector(".card__title").textContent = item.name; //добавляем титл
+    const cardElementPhoto = cardElement.querySelector(".card__photo"); //добавляем сссылку
+    const cardElementName = cardElement.querySelector(".card__title"); //добавляем титл
+    cardElementPhoto.src = item.link; //добавляем сссылку
+    cardElementPhoto.alt = item.name;
+    cardElementName.textContent = item.name; //добавляем титл
 
     cardElement.querySelector(".card__like").addEventListener("click", function (evt) {
         evt.target.classList.toggle("card__like_active");
@@ -77,9 +56,9 @@ function createNewCard(item) {
     });
 
     cardElement.querySelector(".card__photo").addEventListener("click", function (event) {
-        popupOpenImage.querySelector(".popup__photo").src = cardElement.querySelector(".card__photo").src; //копируем фото в попап
-        popupOpenImage.querySelector(".popup__caption").textContent = cardElement.querySelector(".card__title").textContent; //копируем название в попап
-
+        popupPhoto.src = cardElementPhoto.src;
+        popupPhoto.alt = cardElementName.textContent;
+        popupCaption.textContent = cardElementName.textContent;
         openPopup(popupOpenImage); // открываем попап с увеличенными картинками
     });
 
@@ -89,22 +68,25 @@ function createNewCard(item) {
 function addInitialCards() {
     //функция с добавлением карточек в секцию
     initialCards.forEach(function (item) {
-        let str = createNewCard(item);
-        cardsContainer.prepend(str); //добавляем карточку в начало
+        const card = createNewCard(item);
+        cardsContainer.prepend(card); //добавляем карточку в начало
     });
 }
 
-function copyValue() {
+function fillEditProfileInputs() {
     nameInput.value = profileTitle.textContent; //копирование заголовка
     aboutInput.value = profileText.textContent; //копирование параграфа
 }
 
 function openPopup(popupElement) {
-    copyValue();
     popupElement.classList.add("popup_opened"); // функция открыть попап
 }
 
-function closePopup() {
+function openEditProfilePopup() {
+    fillEditProfileInputs();
+}
+
+function closePopup(popupElement) {
     popupEditProfile.classList.remove("popup_opened"); //функция закрыть попап редактирования
     popupAddCard.classList.remove("popup_opened"); //функция закрыть попап добавления фото
     popupOpenImage.classList.remove("popup_opened"); //функция закрыть попап увеличенного фото
@@ -120,14 +102,14 @@ function submitProfileForm(evt) {
 function submitViaTemplate(evt) {
     evt.preventDefault();
 
-    const nameInput = document.querySelector("#input-title"); //выбираем строку ввода названия
-    const linkInput = document.querySelector("#input-link"); //выбираем строку ввода ссылки
+    const nameValue = cardNameInput.value; //копируем имя в имя
+    const linkValue = cardLinkInput.value; //копируем ссылку в картинку
 
-    const nameValue = nameInput.value; //копируем имя в имя
-    const linkValue = linkInput.value; //копируем ссылку в картинку
-
-    let newItem = createNewCard({ name: nameValue, link: linkValue });
+    const newItem = createNewCard({ name: nameValue, link: linkValue });
     cardsContainer.prepend(newItem);
+
+    cardNameInput.value =""; //для пустого поля
+    cardLinkInput.value ="";
 
     closePopup(); //закрываем попап
 }
@@ -139,6 +121,7 @@ addInitialCards(); //вызов функции с добавлением кар�
 //-------------------СЛУШАЛКИ СОБЫТИЙ-----------------------------
 
 profileEditButton.addEventListener("click", function () {
+    openEditProfilePopup();
     openPopup(popupEditProfile);
 }); //действие "клик по кнопке редактирования профиля"
 
