@@ -84,6 +84,7 @@ function openPopup(popupElement) {
 
 function openEditProfilePopup() {
     fillEditProfileInputs();
+    openPopup(popupEditProfile);
 }
 
 function closePopup(popupElement) {
@@ -122,7 +123,7 @@ addInitialCards(); //вызов функции с добавлением кар�
 
 profileEditButton.addEventListener("click", function () {
     openEditProfilePopup();
-    openPopup(popupEditProfile);
+    // openPopup(popupEditProfile);
 }); //действие "клик по кнопке редактирования профиля"
 
 profileAddButton.addEventListener("click", function () {
