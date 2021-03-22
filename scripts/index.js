@@ -1,5 +1,5 @@
 //-------------------------ПОПАПЫ----------------------------
-const popup = document.querySelector(".popup"); //выбираем блок с попап
+const popup = document.querySelectorAll(".popup"); //выбираем блок с попап
 const popupEditProfile = document.querySelector(".popup_type_edit"); //выбираем второй попап для редактирования по модификатору
 const popupAddCard = document.querySelector(".popup_type_add"); //выбираем второй попап для добавления фотографий по модификатору
 
@@ -139,3 +139,20 @@ popupCloseButton.forEach((button) =>
 buttonSaveProfileInfo.addEventListener("submit", submitProfileForm); //действие "клик отправить форму на смену данных в профиле редактирования"
 
 buttonCreateCard.addEventListener("submit", submitViaTemplate); //действие "клик по кнопке добавить фото и название  в карточку "
+
+
+document.addEventListener("keydown", function(evt){
+    if (evt.code === "Escape") {
+        closePopup();
+    }
+}); //закрыть попап по нажатию на esc
+
+// popup.forEach(function(evt) {
+//     evt.addEventListener("click", function() {
+//         closePopup()
+//         evt.stopPropagation();
+//     });
+// });
+
+
+

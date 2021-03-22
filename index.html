@@ -48,12 +48,21 @@
             <article class="popup popup_type_add">
                 <div class="popup__window">
                     <button class="popup__close" type="button"></button>
-                    <form class="form" id="create-button" name="popup-form">
+                    <form class="form" id="create-button" name="popup-form" novalidate>
                         <h2 class="form__title">Новое место</h2>
-                        <input class="form__input form__input_title" id="input-title" type="text" name="input-title" placeholder="Название" value="" minlength="2" maxlength="30" required />
-                        <span class="form__input-error" id="title-input-error">Вы пропустили это поле.</span>
-                        <input class="form__input form__input_link" id="input-link" type="text" name="input-link" placeholder="Ссылка на картинку" value=""  required />
-                        <span class="form__input-error" id="title-input-error">Введите адрес сайта.</span>
+
+                        <label class="form__field">
+                            <input class="form__input form__input_title" id="input-title" type="text" name="input-title" placeholder="Название" value="" minlength="2" maxlength="30" required />
+                            <span class="form__input-error form__input-error-title"></span>
+                        </label>
+
+
+                        <label class="form__field">
+                            <input class="form__input form__input_link" id="input-link" type="url" name="input-link" placeholder="Ссылка на картинку" value=""  required />
+                            <span class="form__input-error form__input-error-link"></span>
+                        </label>
+
+
                         <button class="form__button" type="submit">Создать</button>
                     </form>
                 </div>
@@ -64,12 +73,21 @@
             <article class="popup popup_type_edit">
                 <div class="popup__window">
                     <button class="popup__close" type="button"></button>
-                    <form class="form" id="save-button" name="popup-form">
+                    <form class="form" id="save-button" name="popup-form" novalidate>
                         <h2 class="form__title">Редактировать профиль</h2>
-                        <input class="form__input form__input_name" id="name" type="text" name="input-name" placeholder="Имя" value="" minlength="2" maxlength="40" required />
-                        <span class="form__input-error" id="title-input-error">Вы пропустили это поле.</span>
-                        <input class="form__input form__input_about" id="about" type="text" name="input-about" placeholder="О себе" value="" minlength="2" maxlength="200" required />
-                        <span class="form__input-error" id="title-input-error">Вы пропустили это поле.</span>
+
+                        <label class="form__field">
+                            <input class="form__input form__input_name" id="name" type="text" name="input-name" placeholder="Имя" value="" minlength="2" maxlength="40" required />
+                            <span class="form__input-error form__input-error-name"></span>
+                        </label>
+
+
+                        <label class="form__field">
+                            <input class="form__input form__input_about" id="about" type="text" name="input-about" placeholder="О себе" value="" minlength="2" maxlength="200" required />
+                            <span class="form__input-error form__input-error-about"></span>
+                        </label>
+
+
                         <button class="form__button" type="submit">Сохранить</button>
                     </form>
                 </div>
@@ -100,8 +118,8 @@
                 </article>
             </template>
         </div>
-        <script src="./scripts/validate.js"></script>
         <script src="./scripts/initial-сards.js"></script>
+        <script src="./scripts/validate.js"></script>
         <script src="./scripts/index.js"></script>
     </body>
 </html>
