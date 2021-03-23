@@ -1,5 +1,6 @@
 //-------------------------ПОПАПЫ----------------------------
-const popup = document.querySelectorAll(".popup"); //выбираем блок с попап
+const popup = document.querySelector(".popup"); //выбираем блок с попап
+const popupAll = document.querySelectorAll(".popup"); //выбираем все блоки с попап
 const popupEditProfile = document.querySelector(".popup_type_edit"); //выбираем второй попап для редактирования по модификатору
 const popupAddCard = document.querySelector(".popup_type_add"); //выбираем второй попап для добавления фотографий по модификатору
 
@@ -30,11 +31,9 @@ const aboutInput = document.querySelector("#about"); //выбираем  стр�
 const cardNameInput = document.querySelector("#input-title"); //выбираем строку ввода названия
 const cardLinkInput = document.querySelector("#input-link"); //выбираем строку ввода ссылки
 
-
 //-------------------------ТЕМПЛЭЙТ-----------------------------
 
 const cardsContainer = document.querySelector(".cards"); //выбираем дивчик с карточками в тэмплэйт
-
 
 //--------------------ФУНКЦИИ------------------------
 
@@ -109,8 +108,8 @@ function submitViaTemplate(evt) {
     const newItem = createNewCard({ name: nameValue, link: linkValue });
     cardsContainer.prepend(newItem);
 
-    cardNameInput.value =""; //для пустого поля
-    cardLinkInput.value ="";
+    cardNameInput.value = ""; //для пустого поля
+    cardLinkInput.value = "";
 
     closePopup(); //закрываем попап
 }
@@ -140,19 +139,17 @@ buttonSaveProfileInfo.addEventListener("submit", submitProfileForm); //дейс�
 
 buttonCreateCard.addEventListener("submit", submitViaTemplate); //действие "клик по кнопке добавить фото и название  в карточку "
 
-
-document.addEventListener("keydown", function(evt){
+document.addEventListener("keydown", function (evt) {
     if (evt.code === "Escape") {
         closePopup();
     }
 }); //закрыть попап по нажатию на esc
 
-// popup.forEach(function(evt) {
-//     evt.addEventListener("click", function() {
-//         closePopup()
-//         evt.stopPropagation();
-//     });
-// });
-
-
-
+popupAll.forEach(function (popup) {
+    popup.addEventListener("click", function (evt) {
+        if (evt.target.classList.contains("popup")) closePopup();
+    });
+});
+document.querySelector("popup").addEventListener("click", function (evt) {
+    evt.stopPropagation();
+}); //закрыть попап по клику на затемнение

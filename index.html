@@ -8,7 +8,6 @@
     </head>
     <body class="container">
         <div class="page">
-
             <!-- шапка с логотипом -->
 
             <header class="header">
@@ -51,17 +50,11 @@
                     <form class="form" id="create-button" name="popup-form" novalidate>
                         <h2 class="form__title">Новое место</h2>
 
-                        <label class="form__field">
-                            <input class="form__input form__input_title" id="input-title" type="text" name="input-title" placeholder="Название" value="" minlength="2" maxlength="30" required />
-                            <span class="form__input-error form__input-error-title"></span>
-                        </label>
+                        <input class="form__input form__input_title" id="input-title" type="text" name="input-title" value="" placeholder="Название" minlength="2" maxlength="30" required />
+                        <span class="form__input-error" id="input-title-error"></span>
 
-
-                        <label class="form__field">
-                            <input class="form__input form__input_link" id="input-link" type="url" name="input-link" placeholder="Ссылка на картинку" value=""  required />
-                            <span class="form__input-error form__input-error-link"></span>
-                        </label>
-
+                        <input class="form__input form__input_link" id="input-link" type="url" name="input-link" value="" placeholder="Ссылка на картинку" required />
+                        <span class="form__input-error" id="input-link-error"></span>
 
                         <button class="form__button" type="submit">Создать</button>
                     </form>
@@ -76,17 +69,11 @@
                     <form class="form" id="save-button" name="popup-form" novalidate>
                         <h2 class="form__title">Редактировать профиль</h2>
 
-                        <label class="form__field">
-                            <input class="form__input form__input_name" id="name" type="text" name="input-name" placeholder="Имя" value="" minlength="2" maxlength="40" required />
-                            <span class="form__input-error form__input-error-name"></span>
-                        </label>
+                        <input class="form__input form__input_name" id="name" type="text" name="input-name" value="" placeholder="Имя" minlength="2" maxlength="40" required />
+                        <span class="form__input-error" id="name-error"></span>
 
-
-                        <label class="form__field">
-                            <input class="form__input form__input_about" id="about" type="text" name="input-about" placeholder="О себе" value="" minlength="2" maxlength="200" required />
-                            <span class="form__input-error form__input-error-about"></span>
-                        </label>
-
+                        <input class="form__input form__input_about" id="about" type="text" name="input-about" value="" placeholder="О себе" minlength="2" maxlength="200" required />
+                        <span class="form__input-error" id="about-error"></span>
 
                         <button class="form__button" type="submit">Сохранить</button>
                     </form>
