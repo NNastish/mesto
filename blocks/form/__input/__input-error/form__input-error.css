@@ -9,7 +9,7 @@
   color: #ff0000;
   visibility: hidden;
 }
-@media all and (max-width: 600px) {
+@media all and (max-width: 768px) {
   .form__input-error {
       max-width: 238px;
   }

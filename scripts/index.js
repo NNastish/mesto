@@ -77,8 +77,16 @@ function fillEditProfileInputs() {
     aboutInput.value = profileText.textContent; //копирование параграфа
 }
 
+function closeIfEsc(evt) {
+    const openPopup = document.querySelector(".popup_opened");
+    if (evt.key === "Escape") {
+        closePopup(openPopup);
+    }
+}
+
 function openPopup(popupElement) {
     popupElement.classList.add("popup_opened"); // функция открыть попап
+    document.addEventListener("keydown", closeIfEsc);
 }
 
 function openEditProfilePopup() {
@@ -86,10 +94,11 @@ function openEditProfilePopup() {
     openPopup(popupEditProfile);
 }
 
-function closePopup(popupElement) {
+function closePopup() {
     popupEditProfile.classList.remove("popup_opened"); //функция закрыть попап редактирования
     popupAddCard.classList.remove("popup_opened"); //функция закрыть попап добавления фото
     popupOpenImage.classList.remove("popup_opened"); //функция закрыть попап увеличенного фото
+    document.removeEventListener("keydown", closeIfEsc);
 }
 
 function submitProfileForm(evt) {
@@ -139,17 +148,22 @@ buttonSaveProfileInfo.addEventListener("submit", submitProfileForm); //дейс�
 
 buttonCreateCard.addEventListener("submit", submitViaTemplate); //действие "клик по кнопке добавить фото и название  в карточку "
 
-document.addEventListener("keydown", function (evt) {
-    if (evt.code === "Escape") {
-        closePopup();
-    }
-}); //закрыть попап по нажатию на esc
+// function closeIfEsc(evt) {
+
+//     if (evt.code === "Escape") {
+//         closePopup();
+//         evt.removeEventListener("keydown", closeIfEsc, true);
+//     }
+// }
+
+// document.addEventListener("keydown", closeIfEsc);
 
 popupAll.forEach(function (popup) {
+    // debugger;
     popup.addEventListener("click", function (evt) {
         if (evt.target.classList.contains("popup")) closePopup();
     });
 });
-document.querySelector("popup").addEventListener("click", function (evt) {
+document.querySelector(".popup").addEventListener("click", function (evt) {
     evt.stopPropagation();
 }); //закрыть попап по клику на затемнение
