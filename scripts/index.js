@@ -1,6 +1,5 @@
 //-------------------------ПОПАПЫ----------------------------
-const popup = document.querySelector(".popup"); //выбираем блок с попап
-const popupAll = document.querySelectorAll(".popup"); //выбираем все блоки с попап
+const popups = document.querySelectorAll(".popup"); //выбираем все блоки с попап
 const popupEditProfile = document.querySelector(".popup_type_edit"); //выбираем второй попап для редактирования по модификатору
 const popupAddCard = document.querySelector(".popup_type_add"); //выбираем второй попап для добавления фотографий по модификатору
 
@@ -12,7 +11,7 @@ const popupCaption = popupOpenImage.querySelector(".popup__caption"); //выби
 
 //-------------------------КНОПКИ-----------------------------
 
-const popupCloseButton = document.querySelectorAll(".popup__close"); //выбираем кнопку закрытия попап
+const popupCloseButtons = document.querySelectorAll(".popup__close"); //выбираем кнопку закрытия попап
 const profileEditButton = document.querySelector("#edit"); //выбираем кнопку редактирования профиля
 const profileAddButton = document.querySelector("#add"); //выбираем кнопку добавления фотографии
 
@@ -55,10 +54,16 @@ function createNewCard(item) {
     });
 
     cardElement.querySelector(".card__photo").addEventListener("click", function (event) {
-        popupPhoto.src = cardElementPhoto.src;
-        popupPhoto.alt = cardElementName.textContent;
-        popupCaption.textContent = cardElementName.textContent;
-        openPopup(popupOpenImage); // открываем попап с увеличенными картинками
+        // popupPhoto.src = cardElementPhoto.src;
+        // popupPhoto.alt = cardElementName.textContent;
+        // popupCaption.textContent = cardElementName.textContent;
+        // openPopup(popupOpenImage); // открываем попап с увеличенными картинками //мой вариант (для сравнения пока оставлю)
+
+        popupPhoto.src = item.link;
+        popupPhoto.alt = item.name;
+        popupCaption.textContent = item.name;
+        openPopup(popupOpenImage); //реклмендация ревьюера
+
     });
 
     return cardElement;
@@ -94,12 +99,19 @@ function openEditProfilePopup() {
     openPopup(popupEditProfile);
 }
 
+// function closePopup() {
+//     popupEditProfile.classList.remove("popup_opened"); //функция закрыть попап редактирования
+//     popupAddCard.classList.remove("popup_opened"); //функция закрыть попап добавления фото
+//     popupOpenImage.classList.remove("popup_opened"); //функция закрыть попап увеличенного фото
+//     document.removeEventListener("keydown", closeIfEsc); 
+// } //мой вариант (для сравнения)
+
 function closePopup() {
-    popupEditProfile.classList.remove("popup_opened"); //функция закрыть попап редактирования
-    popupAddCard.classList.remove("popup_opened"); //функция закрыть попап добавления фото
-    popupOpenImage.classList.remove("popup_opened"); //функция закрыть попап увеличенного фото
+    const openPopup = document.querySelector(".popup_opened"); //нашла открытый попап
+    openPopup.classList.remove("popup_opened"); //закрыла
     document.removeEventListener("keydown", closeIfEsc);
-}
+} //универсальное закрытие попап *рекомендацию ревьюера
+
 
 function submitProfileForm(evt) {
     evt.preventDefault(); //отмена стандартного реагирования браузера на событие *поправка от ревьюера
@@ -131,14 +143,13 @@ addInitialCards(); //вызов функции с добавлением кар�
 
 profileEditButton.addEventListener("click", function () {
     openEditProfilePopup();
-    // openPopup(popupEditProfile);
 }); //действие "клик по кнопке редактирования профиля"
 
 profileAddButton.addEventListener("click", function () {
     openPopup(popupAddCard);
 }); //действие "клик по кнопке добавить фото [+] "
 
-popupCloseButton.forEach((button) =>
+popupCloseButtons.forEach((button) =>
     button.addEventListener("click", function () {
         closePopup();
     })
@@ -148,22 +159,12 @@ buttonSaveProfileInfo.addEventListener("submit", submitProfileForm); //дейс�
 
 buttonCreateCard.addEventListener("submit", submitViaTemplate); //действие "клик по кнопке добавить фото и название  в карточку "
 
-// function closeIfEsc(evt) {
+popups.forEach((popup) => {
+    popup.addEventListener("click", (evt) => {
+        if (evt.target.classList.contains("popup_opened")) {
+            closePopup(popup)
+        }
+    })
+}) //закрыть попап по клику на затемнение *рекомендация ревьюера
 
-//     if (evt.code === "Escape") {
-//         closePopup();
-//         evt.removeEventListener("keydown", closeIfEsc, true);
-//     }
-// }
 
-// document.addEventListener("keydown", closeIfEsc);
-
-popupAll.forEach(function (popup) {
-    // debugger;
-    popup.addEventListener("click", function (evt) {
-        if (evt.target.classList.contains("popup")) closePopup();
-    });
-});
-document.querySelector(".popup").addEventListener("click", function (evt) {
-    evt.stopPropagation();
-}); //закрыть попап по клику на затемнение
