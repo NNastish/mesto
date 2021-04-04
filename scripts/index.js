@@ -1,13 +1,8 @@
+
 //-------------------------ПОПАПЫ----------------------------
 const popups = document.querySelectorAll(".popup"); //выбираем все блоки с попап
 const popupEditProfile = document.querySelector(".popup_type_edit"); //выбираем второй попап для редактирования по модификатору
 const popupAddCard = document.querySelector(".popup_type_add"); //выбираем второй попап для добавления фотографий по модификатору
-
-//-------------------------ПОПАП С КАРТИНКОЙ----------------------------
-
-const popupOpenImage = document.querySelector(".popup_type_image"); //выбираем блок с попап с увеличением картинки
-const popupPhoto = popupOpenImage.querySelector(".popup__photo"); //выбираем див в попапе, куда попапдет фото из карточки
-const popupCaption = popupOpenImage.querySelector(".popup__caption"); //выбираем див, куда попадет название фото из карточки
 
 //-------------------------КНОПКИ-----------------------------
 
@@ -36,82 +31,15 @@ const cardsContainer = document.querySelector(".cards"); //выбираем ди
 
 //--------------------ФУНКЦИИ------------------------
 
-function createNewCard(item) {
-    const cardTemplate = document.querySelector("#template").content; //выбираем темплэйт
-    const cardElement = cardTemplate.querySelector(".card").cloneNode(true); //клонируем карточку
-    const cardElementPhoto = cardElement.querySelector(".card__photo"); //добавляем сссылку
-    const cardElementName = cardElement.querySelector(".card__title"); //добавляем титл
-    cardElementPhoto.src = item.link; //добавляем сссылку
-    cardElementPhoto.alt = item.name;
-    cardElementName.textContent = item.name; //добавляем титл
-
-    cardElement.querySelector(".card__like").addEventListener("click", function (evt) {
-        evt.target.classList.toggle("card__like_active");
-    }); //добавляем лайк
-
-    cardElement.querySelector(".card__delete").addEventListener("click", function (evt) {
-        evt.target.closest(".card").remove(); //удаляем карточки
-    });
-
-    cardElement.querySelector(".card__photo").addEventListener("click", function (event) {
-        // popupPhoto.src = cardElementPhoto.src;
-        // popupPhoto.alt = cardElementName.textContent;
-        // popupCaption.textContent = cardElementName.textContent;
-        // openPopup(popupOpenImage); // открываем попап с увеличенными картинками //мой вариант (для сравнения пока оставлю)
-
-        popupPhoto.src = item.link;
-        popupPhoto.alt = item.name;
-        popupCaption.textContent = item.name;
-        openPopup(popupOpenImage); //реклмендация ревьюера
-
-    });
-
-    return cardElement;
-}
-
-function addInitialCards() {
-    //функция с добавлением карточек в секцию
-    initialCards.forEach(function (item) {
-        const card = createNewCard(item);
-        cardsContainer.prepend(card); //добавляем карточку в начало
-    });
-}
-
 function fillEditProfileInputs() {
     nameInput.value = profileTitle.textContent; //копирование заголовка
     aboutInput.value = profileText.textContent; //копирование параграфа
-}
-
-function closeIfEsc(evt) {
-    const openPopup = document.querySelector(".popup_opened");
-    if (evt.key === "Escape") {
-        closePopup(openPopup);
-    }
-}
-
-function openPopup(popupElement) {
-    popupElement.classList.add("popup_opened"); // функция открыть попап
-    document.addEventListener("keydown", closeIfEsc);
 }
 
 function openEditProfilePopup() {
     fillEditProfileInputs();
     openPopup(popupEditProfile);
 }
-
-// function closePopup() {
-//     popupEditProfile.classList.remove("popup_opened"); //функция закрыть попап редактирования
-//     popupAddCard.classList.remove("popup_opened"); //функция закрыть попап добавления фото
-//     popupOpenImage.classList.remove("popup_opened"); //функция закрыть попап увеличенного фото
-//     document.removeEventListener("keydown", closeIfEsc); 
-// } //мой вариант (для сравнения)
-
-function closePopup() {
-    const openPopup = document.querySelector(".popup_opened"); //нашла открытый попап
-    openPopup.classList.remove("popup_opened"); //закрыла
-    document.removeEventListener("keydown", closeIfEsc);
-} //универсальное закрытие попап *рекомендацию ревьюера
-
 
 function submitProfileForm(evt) {
     evt.preventDefault(); //отмена стандартного реагирования браузера на событие *поправка от ревьюера
@@ -123,12 +51,9 @@ function submitProfileForm(evt) {
 function submitViaTemplate(evt) {
     evt.preventDefault();
 
-    const nameValue = cardNameInput.value; //копируем имя в имя
-    const linkValue = cardLinkInput.value; //копируем ссылку в картинку
-
-    const newItem = createNewCard({ name: nameValue, link: linkValue });
-    cardsContainer.prepend(newItem);
-
+    const card = new Card({name: cardNameInput.value, link: cardLinkInput.value}, "#template");
+    const cardElement = card.generateCard();
+    cardsContainer.prepend(cardElement);
     cardNameInput.value = ""; //для пустого поля
     cardLinkInput.value = "";
 
@@ -137,7 +62,17 @@ function submitViaTemplate(evt) {
 
 //-------------------ВЫЗОВ ФУНКЦИИ-------------------------------
 
-addInitialCards(); //вызов функции с добавлением карточек
+// вместо addInitialCards
+initialCards.forEach((item) => {
+    // Создадим экземпляр карточки
+    const card = new Card(item, "#template");
+    // Создаём карточку и возвращаем наружу
+    const cardElement = card.generateCard();
+
+    // Добавляем в DOM
+    document.querySelector(".cards").append(cardElement);
+});
+
 
 //-------------------СЛУШАЛКИ СОБЫТИЙ-----------------------------
 
