@@ -1,9 +1,5 @@
 //-------------------------ПОПАП С КАРТИНКОЙ----------------------------
 
-const popupOpenImage = document.querySelector(".popup_type_image"); //выбираем блок с попап с увеличением картинки
-const popupPhoto = popupOpenImage.querySelector(".popup__photo"); //выбираем див в попапе, куда попапдет фото из карточки
-const popupCaption = popupOpenImage.querySelector(".popup__caption"); //выбираем див, куда попадет название фото из карточки
-
 function closePopup() {
     const openPopup = document.querySelector(".popup_opened"); //нашла открытый попап
     openPopup.classList.remove("popup_opened"); //закрыла
@@ -22,4 +18,4 @@ function openPopup(popupElement) {
     document.addEventListener("keydown", closeIfEsc);
 }
 
-// export {popupCaption, popupPhoto, popupOpenImage, closePopup, openPopup}
+export { closePopup, openPopup };

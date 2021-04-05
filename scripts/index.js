@@ -1,3 +1,7 @@
+import { initialCards } from "./initial-сards.js";
+import { openPopup, closePopup } from "./utils.js";
+import { FormValidator, object } from "./FormValidator.js";
+import { Card } from "./Card.js";
 
 //-------------------------ПОПАПЫ----------------------------
 const popups = document.querySelectorAll(".popup"); //выбираем все блоки с попап
@@ -51,7 +55,7 @@ function submitProfileForm(evt) {
 function submitViaTemplate(evt) {
     evt.preventDefault();
 
-    const card = new Card({name: cardNameInput.value, link: cardLinkInput.value}, "#template");
+    const card = new Card({ name: cardNameInput.value, link: cardLinkInput.value }, "#template");
     const cardElement = card.generateCard();
     cardsContainer.prepend(cardElement);
     cardNameInput.value = ""; //для пустого поля
@@ -60,7 +64,18 @@ function submitViaTemplate(evt) {
     closePopup(); //закрываем попап
 }
 
+function runValidation(data) {
+    const formList = Array.from(document.querySelectorAll(data.formSelector)); // делаем массив
+
+    formList.forEach((formElement) => {
+        const validatorEntity = new FormValidator(data, formElement);
+        validatorEntity.enableValidation();
+    });
+}
+
 //-------------------ВЫЗОВ ФУНКЦИИ-------------------------------
+
+runValidation(object);
 
 // вместо addInitialCards
 initialCards.forEach((item) => {
@@ -72,7 +87,6 @@ initialCards.forEach((item) => {
     // Добавляем в DOM
     document.querySelector(".cards").append(cardElement);
 });
-
 
 //-------------------СЛУШАЛКИ СОБЫТИЙ-----------------------------
 
@@ -97,9 +111,10 @@ buttonCreateCard.addEventListener("submit", submitViaTemplate); //действи
 popups.forEach((popup) => {
     popup.addEventListener("click", (evt) => {
         if (evt.target.classList.contains("popup_opened")) {
-            closePopup(popup)
+            closePopup(popup);
         }
-    })
-}) //закрыть попап по клику на затемнение *рекомендация ревьюера
+    });
+}); //закрыть попап по клику на затемнение *рекомендация ревьюера
+
 
 

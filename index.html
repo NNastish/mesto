@@ -1,122 +1,111 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Место</title>
-        <link rel="stylesheet" href="./pages/index.css" />
-    </head>
-    <body class="container">
-        <div class="page">
-            <!-- шапка с логотипом -->
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Место</title>
+    <link rel="stylesheet" href="./pages/index.css" />
+</head>
+<body class="container">
+<div class="page">
+    <!-- шапка с логотипом -->
 
-            <header class="header">
-                <a href="#" target="_self" class="header__link"><img src="./images/logo.svg" alt="Логотип" class="header__logo" /></a>
-            </header>
+    <header class="header">
+        <a href="#" target="_self" class="header__link"><img src="./images/logo.svg" alt="Логотип" class="header__logo" /></a>
+    </header>
 
-            <!-- секция с профилем -->
+    <!-- секция с профилем -->
 
-            <section class="profile">
-                <div class="profile__box">
-                    <img class="profile__photo" src="./images/image.jpg" alt="Аватар" />
+    <section class="profile">
+        <div class="profile__box">
+            <img class="profile__photo" src="./images/image.jpg" alt="Аватар" />
 
-                    <div class="profile__info">
-                        <div class="profile__header">
-                            <h1 class="profile__title">Жак-Ив Кусто</h1>
-                            <button type="button" class="profile__edit" id="edit"></button>
-                        </div>
-                        <p class="profile__text">Исследователь океана</p>
-                    </div>
+            <div class="profile__info">
+                <div class="profile__header">
+                    <h1 class="profile__title">Жак-Ив Кусто</h1>
+                    <button type="button" class="profile__edit" id="edit"></button>
                 </div>
-
-                <button type="button" class="profile__add" id="add"></button>
-            </section>
-
-            <!-- секция с основным массивом карточек -->
-
-            <section class="cards"></section>
-
-            <!-- футер -->
-
-            <section class="footer">
-                <p class="footer__copyright">&copy;&#160;2020 Mesto Russia</p>
-            </section>
-
-            <!-- popup добавления новой карточки профиля -->
-
-            <article class="popup popup_type_add">
-                <div class="popup__window">
-                    <button class="popup__close" type="button"></button>
-                    <form class="form" id="create-button" name="popup-form" novalidate>
-                        <h2 class="form__title">Новое место</h2>
-
-                        <input class="form__input form__input_title" id="input-title" type="text" name="input-title" value="" placeholder="Название" minlength="2" maxlength="30" required />
-                        <span class="form__input-error" id="input-title-error"></span>
-
-                        <input class="form__input form__input_link" id="input-link" type="url" name="input-link" value="" placeholder="Ссылка на картинку" required />
-                        <span class="form__input-error" id="input-link-error"></span>
-
-                        <button class="form__button" type="submit">Создать</button>
-                    </form>
-                </div>
-            </article>
-
-            <!-- popup редактирования профиля -->
-
-            <article class="popup popup_type_edit">
-                <div class="popup__window">
-                    <button class="popup__close" type="button"></button>
-                    <form class="form" id="save-button" name="popup-form" novalidate>
-                        <h2 class="form__title">Редактировать профиль</h2>
-
-                        <input class="form__input form__input_name" id="name" type="text" name="input-name" value="" placeholder="Имя" minlength="2" maxlength="40" required />
-                        <span class="form__input-error" id="name-error"></span>
-
-                        <input class="form__input form__input_about" id="about" type="text" name="input-about" value="" placeholder="О себе" minlength="2" maxlength="200" required />
-                        <span class="form__input-error" id="about-error"></span>
-
-                        <button class="form__button" type="submit">Сохранить</button>
-                    </form>
-                </div>
-            </article>
-
-            <!-- popup для увеличения фото -->
-
-            <article class="popup popup_type_image popup_opacity">
-                <div class="popup__container">
-                    <figure class="popup__figure">
-                        <img src="#" alt="фотография" class="popup__photo" />
-                        <figcaption class="popup__caption"></figcaption>
-                    </figure>
-                    <button class="popup__close" type="button"></button>
-                </div>
-            </article>
-
-            <!-- заготовка карточки для клонирования -->
-
-<!--            <template id="template template_type_default">-->
-            <template id="template">
-                <article class="card">
-                    <button type="button" class="card__delete"></button>
-                    <img class="card__photo" alt="фотография" />
-                    <div class="card__lists">
-                        <h2 class="card__title"></h2>
-                        <button type="button" class="card__like"></button>
-                    </div>
-                </article>
-            </template>
+                <p class="profile__text">Исследователь океана</p>
+            </div>
         </div>
-<!--        <script type="module" src="./scripts/utils.js"></script>-->
-<!--        <script type="module" src="./scripts/initial-сards.js"></script>-->
-<!--        <script type="module" src="./scripts/validate.js"></script>-->
-<!--        <script type="module" src="./scripts/Card.js"></script>-->
-<!--        <script type="module" src="./scripts/index.js"></script>-->
-        <script src="./scripts/utils.js"></script>
-        <script src="./scripts/initial-сards.js"></script>
-        <script src="./scripts/validate.js"></script>
-        <script src="./scripts/Card.js"></script>
-        <script src="./scripts/index.js"></script>
 
-<!--    <script type="module" src="./scripts/index.js"></script>-->
-    </body>
+        <button type="button" class="profile__add" id="add"></button>
+    </section>
+
+    <!-- секция с основным массивом карточек -->
+
+    <section class="cards"></section>
+
+    <!-- футер -->
+
+    <section class="footer">
+        <p class="footer__copyright">&copy;&#160;2020 Mesto Russia</p>
+    </section>
+
+    <!-- popup добавления новой карточки профиля -->
+
+    <article class="popup popup_type_add">
+        <div class="popup__window">
+            <button class="popup__close" type="button"></button>
+            <form class="form" id="create-button" name="popup-form" novalidate>
+                <h2 class="form__title">Новое место</h2>
+
+                <input class="form__input form__input_title" id="input-title" type="text" name="input-title" value="" placeholder="Название" minlength="2" maxlength="30" required />
+                <span class="form__input-error" id="input-title-error"></span>
+
+                <input class="form__input form__input_link" id="input-link" type="url" name="input-link" value="" placeholder="Ссылка на картинку" required />
+                <span class="form__input-error" id="input-link-error"></span>
+
+                <button class="form__button" type="submit">Создать</button>
+            </form>
+        </div>
+    </article>
+
+    <!-- popup редактирования профиля -->
+
+    <article class="popup popup_type_edit">
+        <div class="popup__window">
+            <button class="popup__close" type="button"></button>
+            <form class="form" id="save-button" name="popup-form" novalidate>
+                <h2 class="form__title">Редактировать профиль</h2>
+
+                <input class="form__input form__input_name" id="name" type="text" name="input-name" value="" placeholder="Имя" minlength="2" maxlength="40" required />
+                <span class="form__input-error" id="name-error"></span>
+
+                <input class="form__input form__input_about" id="about" type="text" name="input-about" value="" placeholder="О себе" minlength="2" maxlength="200" required />
+                <span class="form__input-error" id="about-error"></span>
+
+                <button class="form__button" type="submit">Сохранить</button>
+            </form>
+        </div>
+    </article>
+
+    <!-- popup для увеличения фото -->
+
+    <article class="popup popup_type_image popup_opacity">
+        <div class="popup__container">
+            <figure class="popup__figure">
+                <img src="#" alt="фотография" class="popup__photo" />
+                <figcaption class="popup__caption"></figcaption>
+            </figure>
+            <button class="popup__close" type="button"></button>
+        </div>
+    </article>
+
+    <!-- заготовка карточки для клонирования -->
+
+    <template id="template">
+        <article class="card">
+            <button type="button" class="card__delete"></button>
+            <img class="card__photo" alt="фотография" />
+            <div class="card__lists">
+                <h2 class="card__title"></h2>
+                <button type="button" class="card__like"></button>
+            </div>
+        </article>
+    </template>
+</div>
+<!-- Подключение скриптов -->
+<script type="module" src="./scripts/index.js"></script>
+</body>
 </html>

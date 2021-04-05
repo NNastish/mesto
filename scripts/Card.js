@@ -1,22 +1,21 @@
-// import {popupCaption, popupOpenImage, popupPhoto, openPopup} from "./utils"
+import { openPopup } from "./utils.js";
 
 //класс создаёт карточку с текстом и ссылкой на изображение
-class Card {
 
-    // const popupPhoto = popupOpenImage.querySelector(".popup__photo"); //выбираем див в попапе, куда попапдет фото из карточки
-    // const popupCaption = popupOpenImage.querySelector(".popup__caption"); //выбираем див, куда попадет название фото из карточки
+export class Card {
+    _popupOpenImage = document.querySelector(".popup_type_image"); //выбираем блок с попап с увеличением картинки
+    _popupPhoto = this._popupOpenImage.querySelector(".popup__photo"); //выбираем див в попапе, куда попапдет фото из карточки
+    _popupCaption = this._popupOpenImage.querySelector(".popup__caption"); //выбираем див, куда попадет название фото из карточки
 
     constructor(data, cardSelector) {
         this._photo = data.link;
         this._title = data.name;
         this._cardSelector = cardSelector; // записали селектор в приватное поле
-
     }
 
     _getTemplate() {
         // вернём DOM-элемент карточки
-        return document.querySelector(this._cardSelector)
-            .content.querySelector(".card").cloneNode(true);
+        return document.querySelector(this._cardSelector).content.querySelector(".card").cloneNode(true);
     }
 
     _cardLike() {
@@ -28,10 +27,10 @@ class Card {
     }
 
     _cardPopup() {
-        popupPhoto.src = this._photo;
-        popupPhoto.alt = this._title;
-        popupCaption.textContent = this._title;
-        openPopup(popupOpenImage);
+        this._popupPhoto.src = this._photo;
+        this._popupPhoto.alt = this._title;
+        this._popupCaption.textContent = this._title;
+        openPopup(this._popupOpenImage);
     }
 
     // Функция обработки событий
@@ -41,12 +40,12 @@ class Card {
         });
         this._element.querySelector(".card__delete").addEventListener("click", () => {
             this._cardDelete();
-        })
+        });
 
         this._element.querySelector(".card__photo").addEventListener("click", () => {
             this._cardPopup();
-        })
-    };
+        });
+    }
 
     generateCard() {
         this._element = this._getTemplate();
@@ -55,19 +54,7 @@ class Card {
         this._element.querySelector(".card__title").textContent = this._title;
 
         this._setEventListeners();
-        //не хватает слушателя событий на саму карту
 
         return this._element;
     }
-};
-
-// initialCards.forEach((item) => {
-//    // Создадим экземпляр карточки
-//    const card = new Card(item, "#template");
-//    // Создаём карточку и возвращаем наружу
-//    const cardElement = card.generateCard();
-//
-//    // Добавляем в DOM
-//    document.querySelector(".cards").append(cardElement);
-//  });
-
+}
