@@ -1,7 +1,8 @@
-import { initialCards } from "./initial-сards.js";
+import { initialCards, object } from "./variables.js";
 import { openPopup, closePopup } from "./utils.js";
-import { FormValidator, object } from "./FormValidator.js";
+import { FormValidator } from "./FormValidator.js";
 import { Card } from "./Card.js";
+
 
 //-------------------------ПОПАПЫ----------------------------
 const popups = document.querySelectorAll(".popup"); //выбираем все блоки с попап
@@ -51,16 +52,18 @@ function submitProfileForm(evt) {
     profileText.textContent = aboutInput.value; // меняет параграф
     closePopup(); // закрываем попап
 }
+function createCard() {
+    const card = new Card({ name: cardNameInput.value, link: cardLinkInput.value }, "#template");
+    return card.generateCard();
+}
 
 function submitViaTemplate(evt) {
     evt.preventDefault();
 
-    const card = new Card({ name: cardNameInput.value, link: cardLinkInput.value }, "#template");
-    const cardElement = card.generateCard();
+    const cardElement = createCard();
     cardsContainer.prepend(cardElement);
     cardNameInput.value = ""; //для пустого поля
     cardLinkInput.value = "";
-
     closePopup(); //закрываем попап
 }
 
@@ -75,7 +78,7 @@ function runValidation(data) {
 
 //-------------------ВЫЗОВ ФУНКЦИИ-------------------------------
 
-runValidation(object);
+// runValidation(object);
 
 // вместо addInitialCards
 initialCards.forEach((item) => {
@@ -85,7 +88,7 @@ initialCards.forEach((item) => {
     const cardElement = card.generateCard();
 
     // Добавляем в DOM
-    document.querySelector(".cards").append(cardElement);
+    cardsContainer.append(cardElement);
 });
 
 //-------------------СЛУШАЛКИ СОБЫТИЙ-----------------------------
@@ -95,6 +98,17 @@ profileEditButton.addEventListener("click", function () {
 }); //действие "клик по кнопке редактирования профиля"
 
 profileAddButton.addEventListener("click", function () {
+    /*
+    !!!! я не совсем поняла,
+    как обратиться к конкретному экземпляру и вызывать метод disableSubmitButton()
+    Поэтому перевызываю на каждое открытие по всем имеющимся карточкам валидацию, это решает проблему с открытием.
+    У нас ведь валидация в цикле, я не знаю на момент открытия к какой именно форме обращаться.
+    Как альтернатива, можно создать отдельно функцию, которая также будет доставать все формы,
+    Создаем по экземпляру на каждую форму и у каждой вызовем предложенный вами disable.
+    Но я не вижу принципиальной разницы между этими двумя способами.
+    Жду ответа :)
+     */
+    runValidation(object);
     openPopup(popupAddCard);
 }); //действие "клик по кнопке добавить фото [+] "
 

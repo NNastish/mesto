@@ -1,16 +1,6 @@
-const object = {
-    formSelector: ".form", //див с формой
-    inputSelector: ".form__input", //поле ввода
-    submitButtonSelector: ".form__button", //кнопка
-    inactiveButtonClass: "form__button_disabled", //кнопка_неактивна
-    inputErrorClass: "form__input_type_error", //спан с ошибкой
-    errorClass: "form__input-error_visible", //свойство, меняющее видимость спана
-};
-
 //класс настраивает валидацию полей формы
 class FormValidator {
     constructor(object, formElement) {
-        this._formSelector = object.formSelector;
         this._inputSelector = object.inputSelector;
         this._submitButtonSelector = object.submitButtonSelector;
         this._inactiveButtonClass = object.inactiveButtonClass;
@@ -90,4 +80,4 @@ class FormValidator {
     }
 }
 
-export { FormValidator, object };
+export { FormValidator};
