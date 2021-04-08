@@ -78,7 +78,10 @@ function runValidation(data) {
 
 //-------------------ВЫЗОВ ФУНКЦИИ-------------------------------
 
-// runValidation(object);
+const profileFormValidator = new FormValidator(object, popupEditProfile);
+profileFormValidator.enableValidation();
+const cardFormValidator = new FormValidator(object, popupAddCard);
+cardFormValidator.enableValidation();
 
 // вместо addInitialCards
 initialCards.forEach((item) => {
@@ -98,17 +101,7 @@ profileEditButton.addEventListener("click", function () {
 }); //действие "клик по кнопке редактирования профиля"
 
 profileAddButton.addEventListener("click", function () {
-    /*
-    !!!! я не совсем поняла,
-    как обратиться к конкретному экземпляру и вызывать метод disableSubmitButton()
-    Поэтому перевызываю на каждое открытие по всем имеющимся карточкам валидацию, это решает проблему с открытием.
-    У нас ведь валидация в цикле, я не знаю на момент открытия к какой именно форме обращаться.
-    Как альтернатива, можно создать отдельно функцию, которая также будет доставать все формы,
-    Создаем по экземпляру на каждую форму и у каждой вызовем предложенный вами disable.
-    Но я не вижу принципиальной разницы между этими двумя способами.
-    Жду ответа :)
-     */
-    runValidation(object);
+    // cardFormValidator.disableSubmitButton();
     openPopup(popupAddCard);
 }); //действие "клик по кнопке добавить фото [+] "
 

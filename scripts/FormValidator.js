@@ -59,9 +59,7 @@ class FormValidator {
     _setValEventListeners() {
         const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector)); //Делаем массив из элементов внутри формы
         const buttonElement = this._formElement.querySelector(this._submitButtonSelector); //находим кнопку
-
         this._toggleButtonState(inputList, buttonElement); //вызов функции с массивом и кнопкой и неактивной кнопкой
-
         // перебираем массив, добавляем слушалку события и проверяем
         inputList.forEach((inputElement) => {
             inputElement.addEventListener("input", () => {
@@ -70,6 +68,12 @@ class FormValidator {
                 this._toggleButtonState(inputList, buttonElement); //вызов функции с массивом и кнопкой
             });
         });
+    }
+
+    disableSubmitButton() {
+        const buttonElement = this._formElement.querySelector(this._submitButtonSelector);
+        buttonElement.classList.add(this._inactiveButtonClass);
+        buttonElement.disabled = true;
     }
 
     enableValidation() {
