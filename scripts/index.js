@@ -101,7 +101,7 @@ profileEditButton.addEventListener("click", function () {
 }); //действие "клик по кнопке редактирования профиля"
 
 profileAddButton.addEventListener("click", function () {
-    // cardFormValidator.disableSubmitButton();
+    cardFormValidator.disableSubmitButton();
     openPopup(popupAddCard);
 }); //действие "клик по кнопке добавить фото [+] "
 
