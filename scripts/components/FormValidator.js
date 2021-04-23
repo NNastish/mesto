@@ -1,5 +1,5 @@
 //класс настраивает валидацию полей формы
-class FormValidator {
+export default class FormValidator {
     constructor(object, formElement) {
         this._inputSelector = object.inputSelector;
         this._submitButtonSelector = object.submitButtonSelector;
@@ -83,5 +83,3 @@ class FormValidator {
         this._setValEventListeners();
     }
 }
-
-export { FormValidator};
