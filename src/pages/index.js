@@ -1,3 +1,5 @@
+//import css
+import './index.css';
 //import utils
 import { initialCards, object } from "../scripts/utils/variables.js";
 import {popupAddCard, popupEditProfile,
