@@ -34,11 +34,11 @@ const cardsList = new Section({
 cardsList.renderItems();
 
 const popupAdd = new PopupWithForm(".popup_type_add", (formData) => {
-    const card = new Card(formData, "template",
+    const card = new Card(formData, "#template",
         () => {
             const popupWithImage = new PopupWithImage(".popup_type_image");
             popupWithImage.setEventListeners();
-            popupWithImage.open({name, link});
+            popupWithImage.open(formData);
         });
     const cardElement = card.generateCard();
     cardsList.addItem(cardElement);
@@ -48,7 +48,8 @@ const popupAdd = new PopupWithForm(".popup_type_add", (formData) => {
 const popupEdit = new PopupWithForm(".popup_type_edit", (formData) => {
     const user = new UserInfo({ userNameSelector: ".profile__title", userInfoSelector: ".profile__text"});
     user.setUserInfo(formData);
-    popupEdit.close();
+    popupEdit.setInfoFields(user.getUserInfo());
+    popupEdit.standardClose();
 });
 
 function openPopupAdd() {

@@ -10,7 +10,7 @@ export default class UserInfo {
 
     //публичный метод getUserInfo, который возвращает объект с данными пользователя.
     getUserInfo() {
-        return{
+        return {
             userName: this._userNameSelector.textContent,
             userInfo: this._userInfoSelector.textContent
         }

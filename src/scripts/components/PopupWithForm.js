@@ -27,23 +27,31 @@ export default class PopupWithForm extends Popup {
         return this._formValues;
     }
 
+    setInfoFields({ userName, userInfo }) {
+        this._form.querySelector(".form__input_name").textContent = userName;
+        this._form.querySelector(".form__input_about").textContent = userInfo;
+    }
+
 
     //Перезаписывает родительский метод setEventListeners.
     // Метод setEventListeners класса PopupWithForm должен не только добавлять обработчик клика
     // иконке закрытия, но и добавлять обработчик сабмита формы.
     setEventListeners() {
+        super.setEventListeners();
         this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();
             this._formSubmit(this._getInputValues());
         });
-
-        super.setEventListeners();
     }
 
 
     //Перезаписывает родительский метод close, так как при закрытии попапа форма должна ещё и сбрасываться.
     close() {
         this._formReset.reset();
+        super.close();
+    }
+
+    standardClose() {
         super.close();
     }
 }
