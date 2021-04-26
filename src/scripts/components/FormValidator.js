@@ -7,6 +7,8 @@ export default class FormValidator {
         this._inputErrorClass = object.inputErrorClass;
         this._errorClass = object.errorClass;
         this._formElement = formElement;
+        this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
+        this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     }
 
     // Функция, которая добавляет класс с ошибкой
@@ -57,29 +59,32 @@ export default class FormValidator {
 
     // Функция со слушалками и обработчиками
     _setValEventListeners() {
-        const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector)); //Делаем массив из элементов внутри формы
-        const buttonElement = this._formElement.querySelector(this._submitButtonSelector); //находим кнопку
-        this._toggleButtonState(inputList, buttonElement); //вызов функции с массивом и кнопкой и неактивной кнопкой
+        // this._toggleButtonState(this._inputList, this._buttonElement); //вызов функции с массивом и кнопкой и неактивной кнопкой
         // перебираем массив, добавляем слушалку события и проверяем
-        inputList.forEach((inputElement) => {
+        this._inputList.forEach((inputElement) => {
             inputElement.addEventListener("input", () => {
                 this._isValid(inputElement);
 
-                this._toggleButtonState(inputList, buttonElement); //вызов функции с массивом и кнопкой
+                this._toggleButtonState(this._inputList, this._buttonElement); //вызов функции с массивом и кнопкой
             });
         });
     }
 
     disableSubmitButton() {
-        const buttonElement = this._formElement.querySelector(this._submitButtonSelector);
-        buttonElement.classList.add(this._inactiveButtonClass);
-        buttonElement.disabled = true;
+        this._buttonElement.classList.add(this._inactiveButtonClass);
+        this._buttonElement.disabled = true;
     }
 
     enableValidation() {
         this._formElement.addEventListener("submit", (evt) => {
             evt.preventDefault();
         });
+        this._formElement.addEventListener("reset", () => {
+            this._inputList.forEach((inputElement) => {
+                this._hideInputError(inputElement);
+            })
+            this.disableSubmitButton();
+        })
         this._setValEventListeners();
     }
 }

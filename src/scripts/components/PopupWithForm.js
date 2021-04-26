@@ -5,10 +5,9 @@ import Popup from './Popup.js';
 export default class PopupWithForm extends Popup {
     constructor(popupSelector, formSubmit) {
         super(popupSelector);
-        this._form = this._popup.querySelector(".popup__window");
-        this._inputForm = this._form.querySelectorAll(".form__input");
+        this._inputForm = this._popup.querySelectorAll(".form__input");
         this._formSubmit = formSubmit;
-        this._formReset = this._form.querySelector(".form")
+        this._form = this._popup.querySelector(".form")
         this.setEventListeners();
     }
 
@@ -27,11 +26,6 @@ export default class PopupWithForm extends Popup {
         return this._formValues;
     }
 
-    setInfoFields({ userName, userInfo }) {
-        this._form.querySelector(".form__input_name").textContent = userName;
-        this._form.querySelector(".form__input_about").textContent = userInfo;
-    }
-
 
     //Перезаписывает родительский метод setEventListeners.
     // Метод setEventListeners класса PopupWithForm должен не только добавлять обработчик клика
@@ -47,11 +41,7 @@ export default class PopupWithForm extends Popup {
 
     //Перезаписывает родительский метод close, так как при закрытии попапа форма должна ещё и сбрасываться.
     close() {
-        this._formReset.reset();
-        super.close();
-    }
-
-    standardClose() {
+        this._form.reset();
         super.close();
     }
 }

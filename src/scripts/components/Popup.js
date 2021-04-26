@@ -2,14 +2,14 @@ export default class Popup {
 
     constructor(popupSelector) {
         this._popup = document.querySelector(popupSelector);
+        this._handleEscClose = this._handleEscClose.bind(this);
+        this.close = this.close.bind(this);
     }
 
     //приватный метод - закрывает попап по ESC
     _handleEscClose(evt) {
         if (evt.key === "Escape") {
-            const openPopup = document.querySelector(".popup_opened");
-            openPopup.classList.remove("popup_opened");
-            document.removeEventListener("keydown", this._handleEscClose);
+            this.close();
         }
     }
 
