@@ -1,6 +1,8 @@
 //-------------------------ПОПАПЫ----------------------------
 export const popupEditProfile = document.querySelector(".popup_type_edit"); //выбираем второй попап для редактирования по модификатору
 export const popupAddCard = document.querySelector(".popup_type_add"); //выбираем второй попап для добавления фотографий по модификатору
+export const popupEditNameField = popupEditProfile.querySelector("#name");
+export const popupEditAboutField = popupEditProfile.querySelector("#about");
 
 //-------------------------КНОПКИ-----------------------------
 

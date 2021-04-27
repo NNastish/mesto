@@ -3,7 +3,8 @@ import './index.css';
 //import utils
 import { initialCards, object } from "../scripts/utils/variables.js";
 import {popupAddCard, popupEditProfile,
-    profileAddButton, profileEditButton} from "../scripts/utils/constants.js";
+    profileAddButton, profileEditButton,
+    popupEditAboutField, popupEditNameField} from "../scripts/utils/constants.js";
 //import components
 import Section from "../scripts/components/Section.js";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
@@ -55,8 +56,8 @@ function openPopupAdd() {
 
 function openPopupEdit() {
     const { userName, userInfo } = user.getUserInfo();
-    popupEdit._popup.querySelector("#name").value = userName;
-    popupEdit._popup.querySelector("#about").value = userInfo;
+    popupEditAboutField.value = userInfo;
+    popupEditNameField.value = userName;
     profileFormValidator.disableSubmitButton();
     popupEdit.open();
 }
