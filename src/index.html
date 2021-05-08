@@ -17,6 +17,9 @@
 
     <section class="profile">
         <div class="profile__box">
+            <div class="profile__avatar">
+                <button type="button" class="profile__avatar-overlay"></button>
+            </div>
             <img class="profile__photo" src="<%=require('./images/image.jpg')%>" alt="Аватар" />
 
             <div class="profile__info">
@@ -79,6 +82,22 @@
         </div>
     </article>
 
+    <!-- popup добавления нового аватара -->
+
+    <article class="popup popup_type_avatar">
+        <div class="popup__window">
+            <button class="popup__close" type="button"></button>
+            <form class="form" id="create-avatar" name="popup-form" novalidate>
+                <h2 class="form__title">Обновить аватар</h2>
+
+                <input class="form__input form__input_link" id="link" type="url" name="avatar" value="" placeholder="Ссылка на фототографию" required />
+                <span class="form__input-error" id="link-error"></span>
+
+                <button class="form__button" type="submit">Создать</button>
+            </form>
+        </div>
+    </article>
+
     <!-- popup для увеличения фото -->
 
     <article class="popup popup_type_image popup_opacity">
@@ -91,15 +110,33 @@
         </div>
     </article>
 
+    <!-- popup для подтверждения удаления карточки -->
+
+    <article class="popup popup_type_delete">
+        <div class="popup__container">
+            <button class="popup__close" type="button"></button>
+            <h2 class="form__title form__title_type_delete">Вы уверены?</h2>
+            <form class="form form-delete" >
+                <button class="form__button" type="submit">Да</button>
+            </form>
+        </div>
+    </article>
+
+
+
     <!-- заготовка карточки для клонирования -->
 
     <template id="template">
         <article class="card">
             <button type="button" class="card__delete"></button>
+<!--            <button type="button"></button>-->
             <img class="card__photo" alt="фотография" />
             <div class="card__lists">
                 <h2 class="card__title"></h2>
-                <button type="button" class="card__like"></button>
+                <div class="card__like-box">
+                    <button type="button" class="card__like"></button>
+                    <p class="card__like-numb">0</p>
+                </div>
             </div>
         </article>
     </template>
