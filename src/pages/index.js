@@ -44,14 +44,30 @@ cardFormValidator.enableValidation();
 const avatarFormValidator = new FormValidator(object, popupAvatarEdit);
 avatarFormValidator.enableValidation();
 
+function renderLoading(selector, boolean) {
+    let button = document.querySelector(selector).querySelector(".form__button");
+    if (boolean) {
+        button.textContent = "Сохранение..."
+    } else {
+        button.textContent = "Сохранить"
+    }
+    button = null;
+}
+
+
 const popupEdit = new PopupWithForm(".popup_type_edit", (formData) => {
+    renderLoading(".popup_type_edit", true);
     api.editProfileInfo(formData)
         .then((data) => {
             user.setUserInfo(data);
         })
-        .catch(() => console.log('Ошибка в popupEdit'));
-    popupEdit.close();
-});
+        .catch(() => console.log('Ошибка в popupEdit'))
+    // popupEdit.close();
+        .finally(() => {
+            popupEdit.close();
+            renderLoading(".popup_type_edit", false);
+        });
+    });
 
 function openPopupEdit() {
     const { userName, userInfo } = user.getUserInfo();
@@ -64,13 +80,17 @@ profileEditButton.addEventListener("click", openPopupEdit);
 
 //--------------------------------AVATAR
 const popupAvatar = new PopupWithAvatar(".popup_type_avatar", (formData) => {
-    const avatarPromise = api.editAvatar(formData);
-    avatarPromise.then((data) => {
-        const { avatar } = data;
-        document.querySelector(".profile__photo").src = avatar;
-    })
-        .catch(() => console.log('Ошибка в popupAvatar'));
-    popupAvatar.close();
+    renderLoading(".popup_type_avatar", true);
+    api.editAvatar(formData)
+        .then((data) => {
+            const { avatar } = data;
+            document.querySelector(".profile__photo").src = avatar;
+        })
+        .catch(() => console.log('Ошибка в popupAvatar'))
+        .finally(() => {
+            popupAvatar.close();
+            renderLoading(".popup_type_avatar", false);
+        });
 });
 
 function openAvatarForm() {
@@ -114,8 +134,8 @@ function provideDeleteRights(item, cardElement) {
 function handleDelete(id) {
     let popupCardDelete = new PopupWithDelete(".popup_type_delete", () => {
         api.deleteCard(id)
-        this._cardDelete();
         popupCardDelete.close();
+        this._cardDelete();
         //!!!!! как лучше удалять instance?
         popupCardDelete = null;
         // popupCardDelete = undefined
@@ -175,13 +195,17 @@ const cardsList = new Section(".cards");
 // cardsList.renderItems();
 
 const popupAdd = new PopupWithForm(".popup_type_add", (formData) => {
-    const cardPromise = api.addCard(formData);
-    cardPromise.then((data) => {
-        const cardElement = createCard(data);
-        cardsList.addItem(cardElement);
-    })
-        .catch(() => console.log('Ошибка в popupAdd'));
-    popupAdd.close();
+    renderLoading(".popup_type_add", true);
+    api.addCard(formData)
+        .then((data) => {
+            const cardElement = createCard(data);
+            cardsList.addItem(cardElement);
+        })
+        .catch(() => console.log('Ошибка в popupAdd'))
+        .finally(() => {
+            popupAdd.close();
+            renderLoading(".popup_type_add", false);
+        })
 });
 
 

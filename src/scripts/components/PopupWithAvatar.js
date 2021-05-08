@@ -28,7 +28,8 @@ export default class PopupWithAvatar extends Popup {
         })
     }
 
-    changePhoto() {
-
+    close() {
+        this._form.reset();
+        super.close();
     }
 }
