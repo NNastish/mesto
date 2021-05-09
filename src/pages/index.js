@@ -15,7 +15,6 @@ import FormValidator from "../scripts/components/FormValidator.js";
 import Card from "../scripts/components/Card.js";
 import Api from "../scripts/components/Api.js";
 import PopupWithDelete from "../scripts/components/PopupWithDelete.js";
-import PopupWithAvatar from "../scripts/components/PopupWithAvatar.js";
 
 
 const user = new UserInfo({ userNameSelector: ".profile__title", userInfoSelector: ".profile__text"});
@@ -29,13 +28,29 @@ const api = new Api({
 });
 
 let userId = null;
-const userPromise = api.getUserInfo();
-userPromise.then((data) => {
+
+Promise.all([
+    api.getUserInfo(),
+    api.getInitialCards()
+])
+    .then(firstDrawingPage)
+    .catch(showErrorStatus)
+
+function firstDrawingPage(data) {
+    loadUserProfile(data[0]);
+    loadInitialCardsFromServer(data[1]);
+}
+
+function showErrorStatus(error) {
+    console.log(`Ошибка: ${error.status}`)
+}
+
+function loadUserProfile(data) {
     const {name , about, avatar} = data;
     user.setUserInfo({ name, about});
     document.querySelector(".profile__photo").src = avatar;
     userId = data._id;
-})
+}
 
 const profileFormValidator = new FormValidator(object, popupEditProfile);
 profileFormValidator.enableValidation();
@@ -47,9 +62,10 @@ avatarFormValidator.enableValidation();
 function renderLoading(selector, boolean) {
     let button = document.querySelector(selector).querySelector(".form__button");
     if (boolean) {
-        button.textContent = "Сохранение..."
+        button.textContent = "Сохранение...";
+        button.classList.add("form__button_disabled");
     } else {
-        button.textContent = "Сохранить"
+        button.textContent = "Сохранить";
     }
     button = null;
 }
@@ -60,11 +76,10 @@ const popupEdit = new PopupWithForm(".popup_type_edit", (formData) => {
     api.editProfileInfo(formData)
         .then((data) => {
             user.setUserInfo(data);
+            popupEdit.close();
         })
         .catch(() => console.log('Ошибка в popupEdit'))
-    // popupEdit.close();
         .finally(() => {
-            popupEdit.close();
             renderLoading(".popup_type_edit", false);
         });
     });
@@ -79,7 +94,7 @@ function openPopupEdit() {
 profileEditButton.addEventListener("click", openPopupEdit);
 
 //--------------------------------AVATAR
-const popupAvatar = new PopupWithAvatar(".popup_type_avatar", (formData) => {
+const popupAvatar = new PopupWithForm(".popup_type_avatar", (formData) => {
     renderLoading(".popup_type_avatar", true);
     api.editAvatar(formData)
         .then((data) => {
@@ -101,48 +116,35 @@ function openAvatarForm() {
 avatarEditButton.addEventListener("click", openAvatarForm);
 //--------------------------------CARD
 
-const cardsPromise = api.getInitialCards();
-cardsPromise.then(loadInitialCardsFromServer);
+
 
 const popupWithImage = new PopupWithImage(".popup_type_image");
 
-function handleLike(info) {
-    if (this._cardLikeState.classList.contains("card__like_active")) {
-        api.deletelike(info._id).then(this._refreshLikeQuantity(-1));
+
+function handleLike(id) {
+    if (this._alreadyLiked()) {
+        api.deletelike(id)
+            .then(this._refreshLikeQuantity(-1))
+            .catch(showErrorStatus);
     } else {
-        api.addlike(info._id).then(this._refreshLikeQuantity(1));
+        api.addlike(id)
+            .then(this._refreshLikeQuantity(1))
+            .catch(showErrorStatus)
     }
     this._cardLike();
 }
 
-function isOwner(item) {
-    if (userId != null) {
-        return userId === item.owner._id;
-    }
-    return false;
-}
-
-
-function provideDeleteRights(item, cardElement) {
-    if (!isOwner(item)) {
-        cardElement.querySelector(".card__delete").style.display = 'none';
-    }
-}
-
-
+const popupCardDelete = new PopupWithDelete(".popup_type_delete");
 
 function handleDelete(id) {
-    let popupCardDelete = new PopupWithDelete(".popup_type_delete", () => {
+    popupCardDelete.open(() => {
         api.deleteCard(id)
-        popupCardDelete.close();
-        this._cardDelete();
-        //!!!!! как лучше удалять instance?
-        popupCardDelete = null;
-        // popupCardDelete = undefined
-        // delete window.this;
-
-    });
-    popupCardDelete.open();
+            .then(() => {
+                this._cardDelete();
+                popupCardDelete.close();
+            })
+            .catch(showErrorStatus);
+    })
 }
 
 function createCard(item) {
@@ -152,47 +154,18 @@ function createCard(item) {
         },
         handleLikeClick: handleLike,
         handleDeleteCard: handleDelete
-    });
-    const cardElem = card.generateCard();
-    detectLike(item, cardElem);
-    provideDeleteRights(item, cardElem);
-    return cardElem;
+    }, userId);
+    return card.generateCard();
 }
-
-function detectLike(item, cardElement) {
-    if (isLiked(item)) {
-        cardElement.querySelector(".card__like").classList.add("card__like_active");
-    }
-}
-
-function isLiked(item) {
-    let state = 0;
-    item.likes.forEach((user) => {
-        if (user._id === userId) {
-            state = 1;
-        }
-    })
-    return state === 1;
-}
-
 
 function loadInitialCardsFromServer(data) {
     for (let i = data.length - 1; i >= 0; i -= 1) {
         const cardElement = createCard(data[i]);
-        // detectLike(data[i], cardElement);
         cardsList.addItem(cardElement);
     }
 }
 
 const cardsList = new Section(".cards");
-// const cardsList = new Section({
-//     items: [],
-//     renderer: (item) => {
-//         const cardElement = createCard(item);
-//         cardsList.addItem(cardElement);
-//     }
-// }, ".cards");
-// cardsList.renderItems();
 
 const popupAdd = new PopupWithForm(".popup_type_add", (formData) => {
     renderLoading(".popup_type_add", true);
@@ -200,10 +173,10 @@ const popupAdd = new PopupWithForm(".popup_type_add", (formData) => {
         .then((data) => {
             const cardElement = createCard(data);
             cardsList.addItem(cardElement);
-        })
-        .catch(() => console.log('Ошибка в popupAdd'))
-        .finally(() => {
             popupAdd.close();
+        })
+        .catch(showErrorStatus)
+        .finally(() => {
             renderLoading(".popup_type_add", false);
         })
 });
