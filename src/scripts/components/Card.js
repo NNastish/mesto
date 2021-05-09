@@ -35,7 +35,6 @@ export default class Card {
     }
 
     _refreshLikeQuantity(num) {
-        console.log(num);
         this._cardLikeQuantity.textContent = Number(this._cardLikeQuantity.textContent) + num;
     }
 
