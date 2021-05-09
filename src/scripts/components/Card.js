@@ -39,7 +39,7 @@ export default class Card {
     }
 
     _alreadyLiked() {
-        return this._cardLikeState.classList.contains("card__like_active") ? true : false;
+        return this._cardLikeState.classList.contains("card__like_active");
     }
 
     _isOwner(owner) {
